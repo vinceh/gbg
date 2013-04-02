@@ -205,6 +205,7 @@ input {
   background: url(https://d3levm2kxut31z.cloudfront.net/assets/premium-teams/pattern-9b343c69d49d77de7c574865c9e6a4c9.png);
   background-color: #AA4130;
   width: 200px;
+  padding-bottom: 120px;
   color: white;
   .logo {
     padding: 15px 20px 0;
@@ -246,6 +247,7 @@ input {
             margin: 0;
           }
           label {
+            color: #e6e6e6;
             font-family: "Open Sans";
             font-size: 13px;
             position: relative;
@@ -262,6 +264,7 @@ input {
         text-transform: uppercase;
       }
       .filter-subtitle {
+        color: #e6e6e6;
         font-family: "Open Sans";
         font-size: 13px;
       }
@@ -291,4 +294,29 @@ input {
   text-transform: uppercase;
   font-weight: bold;
   letter-spacing: 1px;
+}
+
+.arrow_box {
+  position: relative;
+  background: #f6f6f6;
+  position: absolute;
+  bottom: -3px;
+  left: 50%;
+}
+.arrow_box:after {
+  bottom: 100%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.arrow_box:after {
+  border-color: rgba(255, 255, 255, 0);
+  border-bottom-color: #f6f6f6;
+  border-width: 100px;
+  left: 50%;
+  margin-left: -100px;
 }
