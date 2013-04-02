@@ -6,4 +6,8 @@ class Boardgame < ActiveRecord::Base
   has_many :honours
   has_many :mechanics
   has_many :subdomains
+
+  def self.top_boardgames(num = 10)
+
+  end
 end

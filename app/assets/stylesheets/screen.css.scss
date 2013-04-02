@@ -34,6 +34,7 @@ p {
 h1, h2, h3 {
   color: #333;
   font-weight: bold;
+  text-transform: uppercase;
 }
 
 h1 {
@@ -42,6 +43,23 @@ h1 {
 
 h2 {
   font-size: 35px;
+}
+
+h3 {
+  font-size: 28px;
+}
+
+.label {
+
+}
+
+input {
+  font-family: "Open Sans";
+  color: #666;
+  &[type="text"] {
+    border: 1px solid #aaa;
+    outline: none;
+  }
 }
 
 .btn {
@@ -170,4 +188,107 @@ h2 {
       width: 100%;
     }
   }
+}
+
+.list-container {
+  .bg {
+    position: relative;
+    left: 130px;
+    @include scale(0.75, 0.75);
+    margin-top: 0;
+  }
+}
+
+.banner {
+  position: fixed;
+  top: 0;
+  background: url(https://d3levm2kxut31z.cloudfront.net/assets/premium-teams/pattern-9b343c69d49d77de7c574865c9e6a4c9.png);
+  background-color: #AA4130;
+  width: 200px;
+  color: white;
+  .logo {
+    padding: 15px 20px 0;
+    font-size: 13px;
+    img {
+      width: 20px;
+    }
+  }
+  hr {
+    border: 0;
+    border-top: 1px dashed #ccc;
+    margin: 0;
+    margin-top: 15px;
+  }
+  h3 {
+    color: white;
+    margin: 15px 0 0 20px;
+  }
+  .filters {
+    margin: 15px 20px;
+    input {
+      &[type="text"] {
+        padding: 7px 10px;
+        width: 100%;
+        @include box-sizing(border-box);
+        @include border-radius(3px);
+      }
+    }
+    .filter {
+      margin-top: 15px;
+      .checkboxes {
+        .checkbox-filter {
+          position: relative;
+          padding: 3px;
+          &:hover {
+            background-color: #9E2D21;
+          }
+          input {
+            margin: 0;
+          }
+          label {
+            font-family: "Open Sans";
+            font-size: 13px;
+            position: relative;
+            bottom: 2px;
+            margin-left: 3px;
+          }
+        }
+      }
+      .label {
+        margin-bottom: 5px;
+        font-size: 15px;
+        font-weight: bold;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+      .filter-subtitle {
+        font-family: "Open Sans";
+        font-size: 13px;
+      }
+      .slider {
+        font-size: 10px;
+        margin-top: 10px;
+        //height: 4px;
+        //.ui-slider-handle {
+        //
+        //  margin-top: -1px;
+        //  outline: none;
+        //  background: white;
+        //  @include border-radius(0);
+        //  &:hover {
+        //    background-color: #ddd;
+        //  }
+        //  &.ui-state-active {
+        //    background-color: #ddd;
+        //  }
+        //}
+      }
+    }
+  }
+}
+
+.logo {
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 1px;
 }
