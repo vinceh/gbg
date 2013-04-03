@@ -87,3 +87,17 @@ task :scrape_desc => :environment do
     b.save!
   end
 end
+
+task :add_ratings => :environment do
+
+  Boardgame.all.each do |b|
+
+    r1 = b.bgg_rating.to_f
+    r2 = b.user_rating.to_f
+
+    rating = (r1+r2)/2
+
+    b.gbg_rating = rating
+    b.save!
+  end
+end

@@ -70,103 +70,39 @@
     <div class="container">popular boardgames</div>
   </h1>
   <div class="container">
-    <div class="bg">
-      <div class="bg-img">
-        <%= image_tag "https://dl.dropbox.com/u/4457377/Small_World_board_game_d.png" %>
-      </div>
-      <div class="bg-info">
-        <div>
-          <h2>small world (2009)</h2>
-          <p>In small World, players vie for conquest and control of a world that is simply too small to accommodate them all.</p>
-          <table>
-            <tr>
-              <td class="title"> age </td>
-              <td> 8+ </td>
-              <td class="title"> geek score </td>
-              <td> 7.41 </td>
-            </tr>
-            <tr>
-              <td class="title"> mechanic </td>
-              <td> area control </td>
-              <td class="title"> category </td>
-              <td> strategy </td>
-            </tr>
-            <tr>
-              <td class="title"> players </td>
-              <td> 2-5 </td>
-              <td class="title"> time </td>
-              <td> 80min </td>
-            </tr>
-          </table>
-          <button class="btn">buy for $29.95</button>
+    <% @bgs.each do |b| %>
+      <div class="bg">
+        <div class="bg-img">
+          <%= image_tag b.image_url %>
+        </div>
+        <div class="bg-info">
+          <div>
+            <h2> <%= b.name %> (<%= b.year_published %>)</h2>
+            <p><%= raw b.desc.first(240) %>...</p>
+            <table>
+              <tr>
+                <td class="title"> age </td>
+                <td> <%= b.age %>+ </td>
+                <td class="title"> geek score </td>
+                <td> <%= b.gbg_rating %> </td>
+              </tr>
+              <tr>
+                <td class="title"> mechanic </td>
+                <td> area control </td>
+                <td class="title"> category </td>
+                <td> strategy </td>
+              </tr>
+              <tr>
+                <td class="title"> players </td>
+                <td> <%= b.num_players %> </td>
+                <td class="title"> time </td>
+                <td> <%= b.playing_time %>min </td>
+              </tr>
+            </table>
+            <button class="btn">buy for $29.95</button>
+          </div>
         </div>
       </div>
-    </div>
-
-    <div class="bg">
-      <div class="bg-img">
-        <%= image_tag "https://dl.dropbox.com/u/4457377/Small_World_board_game_d.png" %>
-      </div>
-      <div class="bg-info">
-        <div>
-          <h2>small world (2009)</h2>
-          <p>In small World, players vie for conquest and control of a world that is simply too small to accommodate them all.</p>
-          <table>
-            <tr>
-              <td class="title"> age </td>
-              <td> 8+ </td>
-              <td class="title"> geek score </td>
-              <td> 7.41 </td>
-            </tr>
-            <tr>
-              <td class="title"> mechanic </td>
-              <td> area control </td>
-              <td class="title"> category </td>
-              <td> strategy </td>
-            </tr>
-            <tr>
-              <td class="title"> players </td>
-              <td> 2-5 </td>
-              <td class="title"> time </td>
-              <td> 80min </td>
-            </tr>
-          </table>
-          <button class="btn">buy for $29.95</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="bg">
-      <div class="bg-img">
-        <%= image_tag "https://dl.dropbox.com/u/4457377/Small_World_board_game_d.png" %>
-      </div>
-      <div class="bg-info">
-        <div>
-          <h2>small world (2009)</h2>
-          <p>In small World, players vie for conquest and control of a world that is simply too small to accommodate them all.</p>
-          <table>
-            <tr>
-              <td class="title"> age </td>
-              <td> 8+ </td>
-              <td class="title"> geek score </td>
-              <td> 7.41 </td>
-            </tr>
-            <tr>
-              <td class="title"> mechanic </td>
-              <td> area control </td>
-              <td class="title"> category </td>
-              <td> strategy </td>
-            </tr>
-            <tr>
-              <td class="title"> players </td>
-              <td> 2-5 </td>
-              <td class="title"> time </td>
-              <td> 80min </td>
-            </tr>
-          </table>
-          <button class="btn">buy for $29.95</button>
-        </div>
-      </div>
-    </div>
+    <% end %>
   </div>
 </div>
