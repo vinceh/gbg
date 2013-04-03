@@ -15,7 +15,32 @@ class Boardgame < ActiveRecord::Base
     end
   end
 
+  def mechanic
+    Mechanic.find_by_boardgame_id(id).mechanic_value
+  end
+
+  def category
+    Category.find_by_boardgame_id(id).category_value
+  end
+
   def self.top_boardgames(num = 10)
     return Boardgame.limit(num).order('gbg_rating desc')
+  end
+
+  def self.categories
+    ["Adventure",
+     "Ancient/Mythology",
+     "Card/Classic",
+     "Economic/Political",
+     "Family",
+     "Fantasy/Sci-Fi",
+     "Medieval/Cultural",
+     "Miniatures/Expansions",
+     "Modern Themes",
+     "War"]
+  end
+
+  def self.category_map
+    ["Abstract Strategy" => ""]
   end
 end

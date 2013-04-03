@@ -1,3 +1,5 @@
+<script src="https://dl.dropbox.com/u/4457377/jquery.customSelect-master/jquery.customSelect.min.js"></script>
+
 <div class="hero">
   <div class="container">
     <div class="title">
@@ -5,8 +7,10 @@
       <br>that you'll love
     </div>
     <form>
-      <select>
-        <option>Choose a category...</option>
+      <select id="catSelect">
+        <%= Boardgame.categories.each_with_index do |c, i| %>
+          <option value="<%= i %>"><%= c %> Games</option>
+        <% end  %>
       </select>
       <button>GO!</button>
     </form>
@@ -14,49 +18,56 @@
 </div>
 <div class="second-hero">
   <div class="container">
+    <div class="lesser-header">
+      <hr>
+      <h1>begin your discovery in...</h1>
+    </div>
+  </div>
+
+  <div class="container categories">
     <a class="cat-link">
       <div>
         <div>new & hot</div>
         <div class="cat-img">
-          <%= image_tag "party.png" %>
+          <%= image_tag "hot.png" %>
         </div>
       </div>
     </a>
     <a class="cat-link">
       <div>
-        <div>new & hot</div>
+        <div>short & sweet</div>
         <div class="cat-img">
-          <%= image_tag "party.png" %>
+          <%= image_tag "time.png" %>
         </div>
       </div>
     </a>
     <a class="cat-link">
       <div>
-        <div>new & hot</div>
+        <div>gather the troops!</div>
         <div class="cat-img">
-          <%= image_tag "party.png" %>
+          <%= image_tag "troop.png" %>
         </div>
       </div>
     </a>
     <a class="cat-link">
       <div>
-        <div>new & hot</div>
+        <div>2 player showdown</div>
         <div class="cat-img">
-          <%= image_tag "party.png" %>
+          <%= image_tag "showdown.png" %>
         </div>
       </div>
     </a>
     <a class="cat-link">
       <div>
-        <div>new & hot</div>
+        <div>good for family</div>
         <div class="cat-img">
-          <%= image_tag "party.png" %>
+          <%= image_tag "family.png" %>
         </div>
       </div>
     </a>
     <a class="cat-link">
       <div>
-        <div>new & hot</div>
+        <div>it's party time</div>
         <div class="cat-img">
           <%= image_tag "party.png" %>
         </div>
@@ -66,9 +77,13 @@
 </div>
 
 <div class="bg-hero">
-  <h1>
-    <div class="container">popular boardgames</div>
-  </h1>
+  <div class="container">
+    <div class="lesser-header">
+      <hr>
+      <h1>popular boardgames</h1>
+    </div>
+  </div>
+
   <div class="container">
     <% @bgs.each do |b| %>
       <div class="bg">
@@ -77,7 +92,7 @@
         </div>
         <div class="bg-info">
           <div>
-            <h2> <%= b.name %> (<%= b.year_published %>)</h2>
+            <h2> <%= link_to b.name+" ("+b.year_published+")" %></h2>
             <p><%= raw b.desc.first(240) %>...</p>
             <table>
               <tr>
@@ -88,15 +103,15 @@
               </tr>
               <tr>
                 <td class="title"> mechanic </td>
-                <td> area control </td>
+                <td> <%= b.mechanic %> </td>
                 <td class="title"> category </td>
-                <td> strategy </td>
+                <td> <%= b.category %> </td>
               </tr>
               <tr>
                 <td class="title"> players </td>
                 <td> <%= b.num_players %> </td>
                 <td class="title"> time </td>
-                <td> <%= b.playing_time %>min </td>
+                <td> <%= b.playing_time %> min </td>
               </tr>
             </table>
             <button class="btn">buy for $29.95</button>
@@ -106,3 +121,7 @@
     <% end %>
   </div>
 </div>
+
+<script>
+  $("#catSelect").customSelect();
+</script>

@@ -9,15 +9,31 @@
 $w: 900px;
 $p: #3FA9F5;
 $pd: #2AA1EA;
-$white: #f6f6f6;
+$white: #fbfbfb;
+
+@mixin bg {
+  background: url(https://dl.dropbox.com/u/4457377/images/fabric_of_squares_gray.png);
+}
 
 body, button {
   font-family: "Open Sans Condensed";
 }
 
+a {
+  text-decoration: none;
+  &:visited {
+    color: #333;
+  }
+  &:hover {
+    cursor: pointer;
+    color: $p;
+  }
+}
+
 body {
-  padding-bottom: 1000px;
-  background-color: #f6f6f6;
+  padding-bottom: 100px;
+  background-color: #fbfbfb;
+  @include bg;
 }
 
 p {
@@ -39,7 +55,7 @@ h1, h2, h3 {
 }
 
 h1 {
-  font-size: 50px;
+  font-size: 45px;
 }
 
 h2 {
@@ -69,9 +85,14 @@ input {
   font-weight: bold;
   text-transform: uppercase;
   border: none;
+  border: 1px solid #2e8bcd;
+  @include box-shadow(inset 0 1px 0 rgba(255,255,255,.3));
   &:hover {
     background-color: $pd;
     cursor: pointer;
+  }
+  &:active {
+    @include box-shadow(inset 0 1px 2px rgba(0,0,0,.3));
   }
 }
 
@@ -92,8 +113,11 @@ input {
       line-height: 110px;
     }
     form {
+      position: relative;
       select {
         padding: 15px;
+        width: 480px;
+        top: 44px;
       }
       button {
         border: none;
@@ -102,25 +126,44 @@ input {
         font-weight: bold;
         font-size: 30px;
         color: #333;
+        &:hover {
+          cursor: pointer;
+          background-color: #ccc;
+        }
       }
     }
   }
 }
 
 .second-hero {
-  height: 600px;
-  background-color: #777;
-  padding: 80px 0 30px;
+  padding: 80px 0 0;
+  // background: url(https://dl.dropbox.com/u/4457377/images/fabric_of_squares_gray.png);
+  .categories {
+    display: table;
+    margin-top: 75px;
+  }
   .cat-link {
+    position: relative;
     float: left;
     margin-right: 50px;
     margin-bottom: 50px;
-    border: 1px solid $white;
     width: 264px;
     height: 248px;
     color: $white;
     text-transform: uppercase;
     font-size: 30px;
+    background-color: $p;
+    @include box-shadow(inset 0 1px 0 rgba(255,255,255,.3));
+    @include transition-property(bottom);
+    @include transition-duration(0.2s);
+    border: 1px solid #2e8bcd;
+    &:active {
+      @include box-shadow(inset 0 1px 2px rgba(0,0,0,.3));
+    }
+    &:hover {
+      cursor: pointer;
+      bottom: 5px;
+    }
     &:nth-child(3n) {
       margin-right: 0;
     }
@@ -129,7 +172,8 @@ input {
       .cat-img {
         text-align: center;
         img {
-
+          margin-top: 15px;
+          max-height: 55%;
         }
       }
     }
@@ -137,12 +181,13 @@ input {
 }
 
 .bg-hero {
-  padding: 80px 0;
-  h1 {
-    text-transform: uppercase;
-    border-bottom: 4px solid #333;
-    line-height: 35px;
-  }
+  padding: 25px 0;
+}
+
+.header-line {
+  text-transform: uppercase;
+  border-bottom: 4px solid #333;
+  line-height: 35px;
 }
 
 .bg {
@@ -155,6 +200,7 @@ input {
     width: 350px;
     img {
       max-width: 100%;
+      @include box-shadow(0 5px 10px #aaa);
     }
   }
   .bg-info {
@@ -339,13 +385,13 @@ input {
   display: table;
   width: 100%;
   margin-bottom: 40px;
-  h3, hr {
+  h1, h2, h3, hr {
     float: left;
   }
-  h3 {
-    background-color: $white;
+  h1, h2, h3 {
     position: relative;
     padding-right: 15px;
+    @include bg;
   }
   hr {
     width: 100%;
@@ -387,7 +433,7 @@ input {
 
 .arrow_box {
   position: relative;
-  background: #f6f6f6;
+  background: #fbfbfb;
   position: absolute;
   bottom: -3px;
   left: 50%;
@@ -404,8 +450,30 @@ input {
 
 .arrow_box:after {
   border-color: rgba(255, 255, 255, 0);
-  border-bottom-color: #f6f6f6;
+  border-bottom-color: #fbfbfb;
   border-width: 100px;
   left: 50%;
   margin-left: -100px;
+}
+
+.customSelect {
+  font-size: 30px;
+  font-weight: bold;
+  border: 4px solid $white;
+  padding: 6px 15px;
+  @include text-shadow(none);
+  background: url(https://dl.dropbox.com/u/4457377/images/arrow.png);
+  background-repeat: no-repeat;
+  background-position: 95% center;
+  background-color: #777;
+}
+
+.customSelect.customSelectHover {
+  background-color: #888;
+  @include box-shadow(0 0 5px #aaa);
+}
+
+.customSelect.customSelectOpen {
+  background-color: #888;
+  @include box-shadow(0 0 5px #aaa);
 }
