@@ -1,227 +1,131 @@
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="https://dl.dropbox.com/u/4457377/jquery%20ui/jquery-ui-1.10.2.custom.min.css">
 
-<div class="container list-container">
-  <div class="banner">
-    <div class="logo">
-      <img src="https://dl.dropbox.com/u/4457377/gbg-logo.png">
-      getboardgames.com
+<%= javascript_include_tag "app" %>
+
+<div ng-app="gbg" ng-controller="ListCtrl" ng-cloak>
+  <div class="container list-container">
+    <div class="banner">
+      <div class="logo">
+        <img src="https://dl.dropbox.com/u/4457377/gbg-logo.png">
+        getboardgames.com
+      </div>
+      <div class="filters">
+        <input ng-model="searchText.name" type="text" placeholder="search...">
+        <div class="filter">
+          <div class="filter-title label">Release date</div>
+          <div class="filter-subtitle">
+            after
+            <select>
+              <option>1996</option>
+            </select>
+          </div>
+        </div>
+        <hr/>
+        <div class="filter">
+          <div class="filter-title label">Age</div>
+          <div class="filter-subtitle">for ages 5+</div>
+          <div class="slider single"></div>
+        </div>
+        <div class="filter">
+          <div class="filter-title label">Players</div>
+          <div class="filter-subtitle">between 1-10</div>
+          <div class="slider step"></div>
+        </div>
+        <div class="filter">
+          <div class="filter-title label">Time </div>
+          <div class="filter-subtitle">at most 80 mins</div>
+          <div class="slider single"></div>
+        </div>
+        <hr/>
+        <div class="filter">
+          <div class="filter-title label">Categories</div>
+          <div class="checkboxes">
+            <div class="checkbox-filter">
+              <input type="checkbox"><label>Adventure</label>
+            </div>
+            <div class="checkbox-filter">
+              <input type="checkbox"><label>Ancient/Mythology</label>
+            </div>
+            <div class="checkbox-filter">
+              <input type="checkbox"><label>Card/Classic</label>
+            </div>
+            <div class="checkbox-filter">
+              <input type="checkbox"><label>Economic/Political</label>
+            </div>
+            <div class="checkbox-filter">
+              <input type="checkbox"><label>Family</label>
+            </div>
+            <div class="checkbox-filter">
+              <input type="checkbox"><label>Fantasy/Sci-Fi</label>
+            </div>
+            <div class="checkbox-filter">
+              <input type="checkbox"><label>Medieval/Cultural</label>
+            </div>
+            <div class="checkbox-filter">
+              <input type="checkbox"><label>Miniatures/Expansions</label>
+            </div>
+            <div class="checkbox-filter">
+              <input type="checkbox"><label>Modern Themes</label>
+            </div>
+            <div class="checkbox-filter">
+              <input type="checkbox"><label>War</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="arrow_box"></div>
     </div>
-    <div class="filters">
-      <input type="text" placeholder="search...">
-      <div class="filter">
-        <div class="filter-title label">Release date</div>
-        <div class="filter-subtitle">
-          after
-          <select>
-            <option>1996</option>
-          </select>
+    <div class="bgs">
+      <div class="bg" ng-repeat="bg in bgs | filter:searchText">
+        <div class="bg-img">
+          <img ng-src="{{bg.image}}"/>
         </div>
-      </div>
-      <div class="filter">
-        <div class="filter-title label">Category</div>
-        <div class="filter-subtitle">
-          in
-          <select>
-            <option>Strategy</option>
-          </select>
-        </div>
-      </div>
-      <hr/>
-      <div class="filter">
-        <div class="filter-title label">Age <span class="filter-subtitle">5+</span></div>
-        <div class="slider single"></div>
-      </div>
-      <div class="filter">
-        <div class="filter-title label">Players <span class="filter-subtitle">1-10</span></div>
-        <div class="slider step"></div>
-      </div>
-      <div class="filter">
-        <div class="filter-title label">Time <span class="filter-subtitle"> at most 80mins</span></div>
-        <div class="slider single"></div>
-      </div>
-      <hr/>
-      <div class="filter">
-        <div class="filter-title label">Mechanic</div>
-        <div class="checkboxes">
-          <div class="checkbox-filter">
-            <input type="checkbox"><label>Deck/Pool Building</label>
-          </div>
-          <div class="checkbox-filter">
-            <input type="checkbox"><label>Co-operative Play</label>
-          </div>
-          <div class="checkbox-filter">
-            <input type="checkbox"><label>Tile Placement</label>
-          </div>
-          <div class="checkbox-filter">
-            <input type="checkbox"><label>Area Control/ Area Influence</label>
-          </div>
-          <div class="checkbox-filter">
-            <input type="checkbox"><label>Player Elimination</label>
-          </div>
-          <div class="checkbox-filter">
-            <input type="checkbox"><label>Grid Movement</label>
-          </div>
-          <div class="checkbox-filter">
-            <input type="checkbox"><label>Betting/Wagering</label>
-          </div>
-          <div class="checkbox-filter">
-            <input type="checkbox"><label>Storytelling</label>
-          </div>
-          <div class="checkbox-filter">
-            <input type="checkbox"><label>Trading</label>
+        <div class="bg-info">
+          <div>
+            <h3><a>{{bg.name}} ({{bg.year}})</a></h3>
+            <p><span ng-bind-html-unsafe="bg.desc.substring(0,120)"></span>...</p>
+            <table>
+              <tr>
+                <td class="title"> age </td>
+                <td> {{bg.age}}+ </td>
+                <td class="title"> geek score </td>
+                <td> {{bg.rating}} </td>
+              </tr>
+              <tr>
+                <td class="title"> mechanic </td>
+                <td> {{bg.mechanic}} </td>
+                <td class="title"> category </td>
+                <td> {{bg.category}} </td>
+              </tr>
+              <tr>
+                <td class="title"> players </td>
+                <td> 2-5 </td>
+                <td class="title"> time </td>
+                <td> {{bg.time}}min </td>
+              </tr>
+            </table>
+            <button class="btn">buy for $29.95</button>
           </div>
         </div>
       </div>
-    </div>
-    <div class="arrow_box"></div>
   </div>
-  <div class="bgs">
-    <div class="bg">
-      <div class="bg-img">
-        <%= image_tag "https://dl.dropbox.com/u/4457377/Small_World_board_game_d.png" %>
-      </div>
-      <div class="bg-info">
-        <div>
-          <h2>small world (2009)</h2>
-          <p>In small World, players vie for conquest and control of a world that is simply too small to accommodate them all.</p>
-          <table>
-            <tr>
-              <td class="title"> age </td>
-              <td> 8+ </td>
-              <td class="title"> geek score </td>
-              <td> 7.41 </td>
-            </tr>
-            <tr>
-              <td class="title"> mechanic </td>
-              <td> area control </td>
-              <td class="title"> category </td>
-              <td> strategy </td>
-            </tr>
-            <tr>
-              <td class="title"> players </td>
-              <td> 2-5 </td>
-              <td class="title"> time </td>
-              <td> 80min </td>
-            </tr>
-          </table>
-          <button class="btn">buy for $29.95</button>
-        </div>
-      </div>
-    </div>
-    <div class="bg">
-      <div class="bg-img">
-        <%= image_tag "https://dl.dropbox.com/u/4457377/Small_World_board_game_d.png" %>
-      </div>
-      <div class="bg-info">
-        <div>
-          <h2>small world (2009)</h2>
-          <p>In small World, players vie for conquest and control of a world that is simply too small to accommodate them all.</p>
-          <table>
-            <tr>
-              <td class="title"> age </td>
-              <td> 8+ </td>
-              <td class="title"> geek score </td>
-              <td> 7.41 </td>
-            </tr>
-            <tr>
-              <td class="title"> mechanic </td>
-              <td> area control </td>
-              <td class="title"> category </td>
-              <td> strategy </td>
-            </tr>
-            <tr>
-              <td class="title"> players </td>
-              <td> 2-5 </td>
-              <td class="title"> time </td>
-              <td> 80min </td>
-            </tr>
-          </table>
-          <button class="btn">buy for $29.95</button>
-        </div>
-      </div>
-    </div>
-    <div class="bg">
-      <div class="bg-img">
-        <%= image_tag "https://dl.dropbox.com/u/4457377/Small_World_board_game_d.png" %>
-      </div>
-      <div class="bg-info">
-        <div>
-          <h2>small world (2009)</h2>
-          <p>In small World, players vie for conquest and control of a world that is simply too small to accommodate them all.</p>
-          <table>
-            <tr>
-              <td class="title"> age </td>
-              <td> 8+ </td>
-              <td class="title"> geek score </td>
-              <td> 7.41 </td>
-            </tr>
-            <tr>
-              <td class="title"> mechanic </td>
-              <td> area control </td>
-              <td class="title"> category </td>
-              <td> strategy </td>
-            </tr>
-            <tr>
-              <td class="title"> players </td>
-              <td> 2-5 </td>
-              <td class="title"> time </td>
-              <td> 80min </td>
-            </tr>
-          </table>
-          <button class="btn">buy for $29.95</button>
-        </div>
-      </div>
-    </div>
-    <div class="bg">
-      <div class="bg-img">
-        <%= image_tag "https://dl.dropbox.com/u/4457377/Small_World_board_game_d.png" %>
-      </div>
-      <div class="bg-info">
-        <div>
-          <h2>small world (2009)</h2>
-          <p>In small World, players vie for conquest and control of a world that is simply too small to accommodate them all.</p>
-          <table>
-            <tr>
-              <td class="title"> age </td>
-              <td> 8+ </td>
-              <td class="title"> geek score </td>
-              <td> 7.41 </td>
-            </tr>
-            <tr>
-              <td class="title"> mechanic </td>
-              <td> area control </td>
-              <td class="title"> category </td>
-              <td> strategy </td>
-            </tr>
-            <tr>
-              <td class="title"> players </td>
-              <td> 2-5 </td>
-              <td class="title"> time </td>
-              <td> 80min </td>
-            </tr>
-          </table>
-          <button class="btn">buy for $29.95</button>
-        </div>
-      </div>
-    </div>
-  </div>
+
+  <script>
+    $(".step").slider({
+      step: 1,
+      range: true,
+      values: [2, 5],
+      min: 1,
+      max: 10
+    });
+
+    $(".single").slider({
+      step: 1,
+      range: "min",
+      value: 30,
+      min: 1,
+      max: 200
+    });
+  </script>
 </div>
-
-<script>
-  $(".step").slider({
-    step: 1,
-    range: true,
-    values: [2, 5],
-    min: 1,
-    max: 10
-  });
-
-  $(".single").slider({
-    step: 1,
-    range: "min",
-    value: 30,
-    min: 1,
-    max: 200
-  });
-</script>
