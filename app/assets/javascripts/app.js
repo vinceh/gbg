@@ -14,23 +14,41 @@ function ListCtrl($scope, $location, Boardgame) {
         getUrlFilters: function() {
 
         },
-        filter: function(bgs, filters) {
+        filter: function() {
             $scope.bgs = listNamespace.allBgs;
-            console.log($scope.bgs);
+            if ( listNamespace.currentFilters.filterYear ) {
+                console.log($scope.bgs);
+                $scope.bgs = _.filter($scope.bgs, function(b) {
+                    var year = parseInt(b.year);
+                    return year >= 2013-listNamespace.currentFilters.filterYear;
+                });
+            }
             $scope.bgs = _.sortBy($scope.bgs, function(bg) { return parseFloat(bg.rating) }).reverse();
-            return listNamespace.allBgs;
+            return $scope.bgs;
         },
         getNextPage: function() {
             Boardgame.get(listNamespace.page).then(function(data) {
                 listNamespace.page++;
                 listNamespace.allBgs = listNamespace.allBgs.concat(data.bgs);
-                var newset = listNamespace.filter(data.bgs, listNamespace.currentFilters);
+                var newset = listNamespace.filter();
                 if (newset.length < 10) {
                     listNamespace.getNextPage();
                 }
             });
         }
     }
+
+    $scope.$watch("filterYear", function(val) {
+        var year = parseInt(val);
+
+        if (year) {
+            listNamespace.currentFilters.filterYear = year;
+        }
+        else {
+            delete listNamespace.currentFilters.filterYear;
+        }
+        listNamespace.filter();
+    });
 
     listNamespace.getNextPage();
 }

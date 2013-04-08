@@ -16,7 +16,10 @@ class Boardgame < ActiveRecord::Base
   end
 
   def mechanic
-    Mechanic.find_by_boardgame_id(id).mechanic_value
+    mech = Mechanic.find_by_boardgame_id(id)
+    if mech
+      mech.mechanic_value
+    end
   end
 
   def category

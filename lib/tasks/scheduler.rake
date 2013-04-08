@@ -101,3 +101,22 @@ task :add_ratings => :environment do
     b.save!
   end
 end
+
+task :bg_year => :environment do
+
+  lowest = 9000
+  highest = 0
+  Boardgame.all.each do |b|
+    year = b.year_published.to_i
+    if year < lowest
+      lowest = year
+    end
+
+    if year > highest
+      highest = year
+    end
+  end
+
+  puts lowest.to_s
+  puts highest.to_s
+end
