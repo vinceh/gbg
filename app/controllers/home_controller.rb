@@ -56,7 +56,7 @@ class HomeController < ApplicationController
     require 'net/http'
     require 'json'
 
-    game = Boardgame.find(1).name
+    game = params[:game]
 
     url = URI.parse("https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=4&q=#{game}%20review&key=AIzaSyALrXdHmy3so_PNiAIYRfNZeDBFyaF4sW4&type=video&videoDefinition=high")
     req = Net::HTTP::Get.new(url.to_s)
