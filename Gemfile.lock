@@ -81,13 +81,13 @@ GEM
     mime-types (1.21)
     multi_json (1.7.0)
     multi_xml (0.4.2)
-    mysql2 (0.3.11-x86-mingw32)
     nokogiri (1.5.0-x86-mingw32)
     paperclip (2.7.0)
       activerecord (>= 2.3.0)
       activesupport (>= 2.3.2)
       cocaine (>= 0.0.2)
       mime-types
+    pg (0.14.0-x86-mingw32)
     polyglot (0.3.3)
     rack (1.4.5)
     rack-cache (1.2)
@@ -151,9 +151,9 @@ DEPENDENCIES
   commands
   compass-rails
   jquery-rails
-  mysql2
   nokogiri
   paperclip (~> 2.7)
+  pg
   rails (= 3.2.7)
   sass-rails (~> 3.2.3)
   seed_dumper

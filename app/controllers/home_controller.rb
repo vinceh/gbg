@@ -57,7 +57,7 @@ class HomeController < ApplicationController
     require 'json'
 
     game = "Dominion"
-                                                                           gi
+
     url = URI.parse("https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=#{game}&key=AIzaSyALrXdHmy3so_PNiAIYRfNZeDBFyaF4sW4")
     req = Net::HTTP::Get.new(url.to_s)
     http = Net::HTTP.new(url.host, url.port)
