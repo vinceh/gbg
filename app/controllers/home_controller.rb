@@ -56,9 +56,9 @@ class HomeController < ApplicationController
     require 'net/http'
     require 'json'
 
-    game = "Dominion"
+    game = params[:game]
 
-    url = URI.parse("https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=#{game}&key=AIzaSyALrXdHmy3so_PNiAIYRfNZeDBFyaF4sW4")
+    url = URI.parse("https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=4&q=#{game}&key=AIzaSyALrXdHmy3so_PNiAIYRfNZeDBFyaF4sW4&type=video")
     req = Net::HTTP::Get.new(url.to_s)
     http = Net::HTTP.new(url.host, url.port)
     http.use_ssl = true
