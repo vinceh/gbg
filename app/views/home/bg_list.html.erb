@@ -1,21 +1,18 @@
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
-<link rel="stylesheet" href="https://dl.dropbox.com/u/4457377/jquery%20ui/jquery-ui-1.10.2.custom.min.css">
 
 <%= javascript_include_tag "app" %>
 
+
 <div ng-app="gbg" ng-controller="ListCtrl" ng-cloak>
+  <div scrolly="listNamespace.getNextPage()"></div>
   <div class="container list-container">
     <div class="banner">
-      <div class="logo">
-        <img src="https://dl.dropbox.com/u/4457377/gbg-logo.png">
-        getboardgames.com
-      </div>
       <div class="filters">
         <input ng-model="searchText.name" type="text" placeholder="search...">
         <div class="filter">
           <div class="filter-title label">Release date</div>
           <div class="filter-subtitle">
-            <select ng-model="filterYear">
+            <select ng-model="bgFilters.filterYear">
               <option value="">any time</option>
               <option value="1">within the last year</option>
               <option value="5">within the last 5 years</option>
@@ -25,68 +22,43 @@
           </div>
         </div>
         <hr/>
-        <div class="filter">
+        <div class="filter" slider slider-value="bgFilters.filterAge" slider-type="single" step="1" min="0" max="17" initial="bgFilters.initials.age">
           <div class="filter-title label">Age</div>
-          <div class="filter-subtitle">for ages 5+</div>
-          <div class="slider single"></div>
+          <div class="filter-subtitle">for ages {{sliderDisplay}}+</div>
+          <div class="slider"></div>
         </div>
-        <div class="filter">
+        <div class="filter" slider slider-value="bgFilters.filterPlayers" slider-type="single" step="1" min="1" max="10" initial="bgFilters.initials.players">
           <div class="filter-title label">Players</div>
-          <div class="filter-subtitle">between 1-10</div>
+          <div class="filter-subtitle">{{sliderDisplay < 10 && ("max " + sliderDisplay + " player" + (sliderDisplay > 1 && "s" || "")) || "any number of players"}}</div>
           <div class="slider step"></div>
         </div>
-        <div class="filter">
+        <div class="filter" slider slider-value="bgFilters.filterTime" slider-type="single" step="15" min="30" max="240" initial="bgFilters.initials.time">
           <div class="filter-title label">Time </div>
-          <div class="filter-subtitle">at most 80 mins</div>
+          <div class="filter-subtitle">{{sliderDisplay < 240 && ("max " + sliderDisplay + " mins") || "any amount of time"}}</div>
           <div class="slider single"></div>
         </div>
         <hr/>
         <div class="filter">
           <div class="filter-title label">Categories</div>
           <div class="checkboxes">
-            <div class="checkbox-filter">
-              <input type="checkbox"><label>Adventure</label>
-            </div>
-            <div class="checkbox-filter">
-              <input type="checkbox"><label>Ancient/Mythology</label>
-            </div>
-            <div class="checkbox-filter">
-              <input type="checkbox"><label>Card/Classic</label>
-            </div>
-            <div class="checkbox-filter">
-              <input type="checkbox"><label>Economic/Political</label>
-            </div>
-            <div class="checkbox-filter">
-              <input type="checkbox"><label>Family</label>
-            </div>
-            <div class="checkbox-filter">
-              <input type="checkbox"><label>Fantasy/Sci-Fi</label>
-            </div>
-            <div class="checkbox-filter">
-              <input type="checkbox"><label>Medieval/Cultural</label>
-            </div>
-            <div class="checkbox-filter">
-              <input type="checkbox"><label>Miniatures/Expansions</label>
-            </div>
-            <div class="checkbox-filter">
-              <input type="checkbox"><label>Modern Themes</label>
-            </div>
-            <div class="checkbox-filter">
-              <input type="checkbox"><label>War</label>
-            </div>
+            <label for="cat{{$index}}" class="checkbox-filter" ng-repeat="(c,v) in bgFilters.categories">
+              <input type="checkbox" ng-model="bgFilters.categories[c].checked" id="cat{{$index}}"><label>{{c}}</label>
+            </label>
           </div>
         </div>
       </div>
       <div class="arrow_box"></div>
     </div>
     <div class="bgs">
+
+      <h1><%= image_tag "ajax-loader.gif", "ng-show" => "filtering" %></h1>
       <div class="bg" ng-repeat="bg in bgs | filter:searchText">
         <div class="bg-img">
           <img ng-src="{{bg.image}}"/>
         </div>
         <div class="bg-info">
           <div>
-            <h3><a>{{bg.name}} ({{bg.year}})</a></h3>
+            <h3><a target="_blank" href="/boardgame/{{bg.id}}">{{bg.name}} ({{bg.year}})</a></h3>
             <p><span ng-bind-html-unsafe="bg.desc.substring(0,120)"></span>...</p>
             <table>
               <tr>
@@ -103,32 +75,17 @@
               </tr>
               <tr>
                 <td class="title"> players </td>
-                <td> 2-5 </td>
+                <td> {{bg.minPlayers}}-{{bg.maxPlayers}} </td>
                 <td class="title"> time </td>
                 <td> {{bg.time}}min </td>
               </tr>
             </table>
-            <button class="btn">buy for $29.95</button>
+            <a target="_blank" href="{{bg.aUrl}}" class="btn">buy for {{bg.aPrice}} <%= image_tag "Amazon-Logo.png" %></a>
           </div>
         </div>
       </div>
+
+      <div><%= image_tag "ajax-loader.gif", "ng-show" => "filtering" %></div>
+    </div>
   </div>
-
-  <script>
-    $(".step").slider({
-      step: 1,
-      range: true,
-      values: [2, 5],
-      min: 1,
-      max: 10
-    });
-
-    $(".single").slider({
-      step: 1,
-      range: "min",
-      value: 30,
-      min: 1,
-      max: 200
-    });
-  </script>
 </div>

@@ -12,6 +12,19 @@
 </head>
 <body>
 
+<div class="topbar">
+  <div class="container">
+    <span class="logo">
+      <%= link_to :controller => :home do %>
+        <%= image_tag "gbg-logo.png" %>
+      getboardgames.com
+      <% end %>
+    </span>
+    <%= link_to "Browse Boardgames", {:controller => :home, :action => :bg_list}, :class => "link" %>
+  </div>
+
+</div>
+
 <%= yield %>
 
 </body>

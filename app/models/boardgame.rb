@@ -1,6 +1,12 @@
 class Boardgame < ActiveRecord::Base
-  attr_accessible :thumbnail
-  has_attached_file :thumbnail
+  has_attached_file 	:image,
+                      :storage => :s3,
+                      :default_url => ActionController::Base.helpers.asset_path("hero1.jpg"),
+                      :bucket => 'getboardgames',
+                      :s3_credentials => {
+                        :access_key_id => 'AKIAI576XAU7SH57QZFA',
+                        :secret_access_key => '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'
+                      }
 
   has_many :categories
   has_many :honours
@@ -23,8 +29,41 @@ class Boardgame < ActiveRecord::Base
   end
 
   def category
-    Category.find_by_boardgame_id(id).category_value
+    cat = Category.find_by_boardgame_id(id)
+    if cat
+      cat.category_value
+    end
   end
+
+  #def price
+  #  req = Vacuum.new
+  #
+  #  game = name
+  #
+  #  req.configure key:    'AKIAJWEKVGBSCPOG544A',
+  #                secret: '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',
+  #                tag:    'getboar-20'
+  #
+  #  params = { 'Operation'   => 'ItemSearch',
+  #             'SearchIndex' => 'Toys',
+  #             'Keywords'    => game,
+  #             'ResponseGroup' => 'Offers,Small'}
+  #
+  #  @res = req.get query: params # XPath is your friend.
+  #  doc = Nokogiri.XML(@res.body)
+  #
+  #  urlNode = doc.xpath('//xmlns:Item//xmlns:ItemLink//xmlns:URL')[0]
+  #  priceNode = doc.xpath('//xmlns:Offer//xmlns:FormattedPrice')[0]
+  #
+  #  if (urlNode && priceNode)
+  #    url = urlNode.text
+  #    price  = priceNode.text
+  #
+  #    return [url,price]
+  #  else
+  #    return nil
+  #  end
+  #end
 
   def self.top_boardgames(num = 10)
     return Boardgame.limit(num).order('gbg_rating desc')

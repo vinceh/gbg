@@ -107,7 +107,7 @@ task :bg_year => :environment do
   lowest = 9000
   highest = 0
   Boardgame.all.each do |b|
-    year = b.year_published.to_i
+    year = b.age.to_i
     if year < lowest
       lowest = year
     end
@@ -119,4 +119,72 @@ task :bg_year => :environment do
 
   puts lowest.to_s
   puts highest.to_s
+end
+
+task :amazon_images => :environment do
+  require "open-uri"
+
+  Boardgame.all.each do |b|
+
+    puts "Getting image for #{b.name} at #{b.id}"
+    b.image = open(b.image_url)
+    b.save!
+
+    sleep(1)
+  end
+end
+
+task :amazon => :environment do
+  Boardgame.all.each do |b|
+    if b.id >= 105
+      req = Vacuum.new
+
+      game = b.name
+
+      if b.id == 6
+        game = "Android Netrunner Living Card Game"
+      elsif b.id == 44
+        game = "War of the Ring"
+      elsif b.id == 71
+        game = "The making of the president"
+      elsif b.id == 84
+        game = "space hulk third edition"
+      elsif b.id == 14
+        game = "wallenstein"
+      end
+
+      game = game.gsub /\s*\(.+\)$/, ''
+      game = game.gsub '-', ' '
+      game = game.gsub ':', ' '
+      game = game.gsub '!', ' '
+      game = game.gsub '#', ' '
+      game = game.gsub '?', ' '
+      game = game.gsub '\'', ' '
+
+      req.configure key:    'AKIAJWEKVGBSCPOG544A',
+                    secret: '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',
+                    tag:    'getboar-20'
+
+      params = { 'Operation'   => 'ItemSearch',
+                 'SearchIndex' => 'All',
+                 'Keywords'    => game,
+                 'ResponseGroup' => 'Offers,Small'}
+
+      @res = req.get query: params # XPath is your friend.
+      doc = Nokogiri.XML(@res.body)
+
+      urlNode = doc.xpath('//xmlns:Item//xmlns:ItemLink//xmlns:URL')[0]
+      priceNode = doc.xpath('//xmlns:FormattedPrice')[0]
+
+      if (urlNode && priceNode)
+        b.price = priceNode.text
+        b.amazon_url = urlNode.text
+        b.save!
+      else
+        puts "Couldn't get value for #{b.name} with #{b.id}"
+      end
+    end
+
+    sleep(1)
+  end
 end

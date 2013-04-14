@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130403020239) do
+ActiveRecord::Schema.define(:version => 20130413225123) do
 
   create_table "boardgames", :force => true do |t|
     t.string  "name"
@@ -31,6 +31,8 @@ ActiveRecord::Schema.define(:version => 20130403020239) do
     t.text    "desc"
     t.integer "age"
     t.decimal "gbg_rating",         :precision => 8, :scale => 2
+    t.string  "price"
+    t.string  "amazon_url"
   end
 
   create_table "categories", :force => true do |t|

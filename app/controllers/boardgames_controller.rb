@@ -1,5 +1,16 @@
 class BoardgamesController < ApplicationController
   def detail
+    @bg = Boardgame.find(params[:id]);
+
+    cat = Category.where(:boardgame_id => @bg.id).first
+    cats = Boardgame.joins(:categories).where(:categories => {:category_value => cat.category_value}).order('gbg_rating desc').limit(5)
+    @similar = []
+    cats.each do |c|
+      if c.id != @bg.id
+        @similar.push(c)
+      end
+    end
+
 
   end
 
@@ -12,6 +23,7 @@ class BoardgamesController < ApplicationController
     bgsq.each do |b|
       bgs[:bgs].push(
         {
+          :id => b.id,
           :name => b.name,
           :rating => b.gbg_rating,
           :year => b.year_published,
@@ -22,7 +34,9 @@ class BoardgamesController < ApplicationController
           :desc => b.desc,
           :age => b.age,
           :mechanic => b.mechanic,
-          :category => Boardgame.category_map[b.category]
+          :category => Boardgame.category_map[b.category],
+          :aUrl => b.amazon_url,
+          :aPrice => b.price
         }
       )
     end

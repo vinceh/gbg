@@ -1,4 +1,4 @@
-<script src="https://dl.dropbox.com/u/4457377/jquery.customSelect-master/jquery.customSelect.min.js"></script>
+<%= javascript_include_tag "jquery.customSelect.min" %>
 
 <div class="hero">
   <div class="container">
@@ -6,14 +6,15 @@
       discover boardgames
       <br>that you'll love
     </div>
-    <form>
+    <div class="hero-select">
       <select id="catSelect">
+        <option value="0">All Games</option>
         <%= Boardgame.categories.each_with_index do |c, i| %>
-          <option value="<%= i %>"><%= c %> Games</option>
+          <option value="<%= i+1 %>"><%= c %> Games</option>
         <% end  %>
       </select>
       <button>GO!</button>
-    </form>
+    </div>
   </div>
 </div>
 <div class="second-hero">
@@ -25,7 +26,7 @@
   </div>
 
   <div class="container categories">
-    <a class="cat-link">
+    <a class="cat-link" href="/boardgames/#/?releaseDate=1">
       <div>
         <div>new & hot</div>
         <div class="cat-img">
@@ -33,7 +34,7 @@
         </div>
       </div>
     </a>
-    <a class="cat-link">
+    <a class="cat-link" href="/boardgames/#/?time=45">
       <div>
         <div>short & sweet</div>
         <div class="cat-img">
@@ -41,7 +42,7 @@
         </div>
       </div>
     </a>
-    <a class="cat-link">
+    <a class="cat-link" href="/boardgames/#/?players=9">
       <div>
         <div>gather the troops!</div>
         <div class="cat-img">
@@ -49,7 +50,7 @@
         </div>
       </div>
     </a>
-    <a class="cat-link">
+    <a class="cat-link" href="/boardgames/#/?players=2">
       <div>
         <div>2 player showdown</div>
         <div class="cat-img">
@@ -57,7 +58,7 @@
         </div>
       </div>
     </a>
-    <a class="cat-link">
+    <a class="cat-link" href="/boardgames/#/?noCats=Adventure,Ancient%2FMythology,Card%2FClassic,Economic%2FPolitical,Fantasy%2FSci%2DFi,Medieval%2FCultural,Miniatures%2FExpansions,War">
       <div>
         <div>good for family</div>
         <div class="cat-img">
@@ -92,7 +93,7 @@
         </div>
         <div class="bg-info">
           <div>
-            <h2> <%= link_to b.name+" ("+b.year_published+")" %></h2>
+            <h2> <%= link_to b.name+" ("+b.year_published+")", :controller => :boardgames, :action => :detail, :id => b.id %></h2>
             <p><%= raw b.desc.first(240) %>...</p>
             <table>
               <tr>
@@ -114,7 +115,7 @@
                 <td> <%= b.playing_time %> min </td>
               </tr>
             </table>
-            <button class="btn">buy for $29.95</button>
+            <a target="_blank" href="<%= b.amazon_url %>" class="btn">buy for <%= b.price %> <%= image_tag "Amazon-Logo.png" %></a>
           </div>
         </div>
       </div>
@@ -123,5 +124,45 @@
 </div>
 
 <script>
+
   $("#catSelect").customSelect();
+
+  $(".hero-select button").click(function() {
+    console.log($(".hero-select select").val());
+    switch (parseInt($(".hero-select select").val())) {
+      case 0:
+        window.location = "/boardgames";
+        break;
+      case 1:
+        window.location = "/boardgames/#/?noCats=Ancient%2FMythology,Card%2FClassic,Economic%2FPolitical,Family,Fantasy%2FSci%2DFi,Medieval%2FCultural,Miniatures%2FExpansions,Modern%20Themes,War";
+        break;
+      case 2:
+        window.location = "/boardgames/#/?noCats=Adventure,Card%2FClassic,Economic%2FPolitical,Family,Fantasy%2FSci%2DFi,Medieval%2FCultural,Miniatures%2FExpansions,Modern%20Themes,War";
+        break;
+      case 3:
+        window.location = "/boardgames/#/?noCats=Adventure,Ancient%2FMythology,Card%2FClassic,Economic%2FPolitical,Family,Fantasy%2FSci%2DFi,Medieval%2FCultural,Miniatures%2FExpansions,Modern%20Themes,War";
+        break;
+      case 4:
+        window.location = "/boardgames/#/?noCats=Adventure,Ancient%2FMythology,Card%2FClassic,Family,Fantasy%2FSci%2DFi,Medieval%2FCultural,Miniatures%2FExpansions,Modern%20Themes,War";
+        break;
+      case 5:
+        window.location = "/boardgames/#/?noCats=Adventure,Ancient%2FMythology,Card%2FClassic,Economic%2FPolitical,Fantasy%2FSci%2DFi,Medieval%2FCultural,Miniatures%2FExpansions,Modern%20Themes,War";
+        break;
+      case 6:
+        window.location = "/boardgames/#/?noCats=Adventure,Ancient%2FMythology,Card%2FClassic,Economic%2FPolitical,Family,Medieval%2FCultural,Miniatures%2FExpansions,Modern%20Themes,War";
+        break;
+      case 7:
+        window.location = "/boardgames/#/?noCats=Adventure,Ancient%2FMythology,Card%2FClassic,Economic%2FPolitical,Family,Fantasy%2FSci%2DFi,Miniatures%2FExpansions,Modern%20Themes,War";
+        break;
+      case 8:
+        window.location = "/boardgames/#/?noCats=Adventure,Ancient%2FMythology,Card%2FClassic,Economic%2FPolitical,Family,Fantasy%2FSci%2DFi,Medieval%2FCultural,Modern%20Themes,War";
+        break;
+      case 9:
+        window.location = "/boardgames/#/?noCats=Adventure,Ancient%2FMythology,Card%2FClassic,Economic%2FPolitical,Family,Fantasy%2FSci%2DFi,Medieval%2FCultural,Miniatures%2FExpansions,War";
+        break;
+      case 10:
+        window.location = "/boardgames/#/?noCats=Adventure,Ancient%2FMythology,Card%2FClassic,Economic%2FPolitical,Family,Fantasy%2FSci%2DFi,Medieval%2FCultural,Miniatures%2FExpansions,Modern%20Themes";
+        break;
+    }
+  });
 </script>

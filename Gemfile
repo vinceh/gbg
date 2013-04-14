@@ -5,13 +5,14 @@ gem 'rails', '3.2.7'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'mysql2'
-# gem 'pg'
+# gem 'mysql2'
+gem 'pg'
 gem "paperclip", "~> 2.7"
 gem 'aws-s3'
 gem 'aws-sdk'
 gem 'will_paginate'
 gem 'angularjs-rails'
+gem 'vacuum'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -30,6 +31,8 @@ end
 gem 'jquery-rails'
 gem 'nokogiri'
 gem 'seed_dumper'
+
+gem 'commands', group: [:development, :test]
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

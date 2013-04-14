@@ -12,7 +12,7 @@ $pd: #2AA1EA;
 $white: #fbfbfb;
 
 @mixin bg {
-  background: url(https://dl.dropbox.com/u/4457377/images/fabric_of_squares_gray.png);
+  background: url(fabric_of_squares_gray.png);
 }
 
 body, button {
@@ -21,6 +21,7 @@ body, button {
 
 a {
   text-decoration: none;
+  color: #333;
   &:visited {
     color: #333;
   }
@@ -28,9 +29,17 @@ a {
     cursor: pointer;
     color: $p;
   }
+  &.btn {
+    display: inline-block;
+    text-align: center;
+    &:hover, &:visited {
+      color: white;
+    }
+  }
 }
 
 body {
+  padding-top: 36px;
   padding-bottom: 100px;
   background-color: #fbfbfb;
   @include bg;
@@ -41,6 +50,27 @@ p {
   font-size: 14px;
   line-height: 22px;
   font-family: "Open Sans";
+}
+
+.topbar {
+  background-color: #333;
+  color: white;
+  padding: 10px 0;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  a {
+    color: white;
+  }
+  .logo img {
+    height: 15px;
+  }
+  .link {
+    margin-left: 40px;
+    color: #ddd;
+  }
 }
 
 .container {
@@ -86,6 +116,7 @@ input {
   text-transform: uppercase;
   border: none;
   border: 1px solid #2e8bcd;
+  padding: 5px 0;
   @include box-shadow(inset 0 1px 0 rgba(255,255,255,.3));
   &:hover {
     background-color: $pd;
@@ -93,6 +124,12 @@ input {
   }
   &:active {
     @include box-shadow(inset 0 1px 2px rgba(0,0,0,.3));
+  }
+  img {
+    height: 19px;
+    position: relative;
+    top: 1px;
+    margin-left: 5px;
   }
 }
 
@@ -112,7 +149,7 @@ input {
     .title {
       line-height: 110px;
     }
-    form {
+    .hero-select {
       position: relative;
       select {
         padding: 15px;
@@ -137,7 +174,6 @@ input {
 
 .second-hero {
   padding: 80px 0 0;
-  // background: url(https://dl.dropbox.com/u/4457377/images/fabric_of_squares_gray.png);
   .categories {
     display: table;
     margin-top: 75px;
@@ -212,9 +248,12 @@ input {
       text-transform: uppercase;
       margin-bottom: 20px;
     }
+    .about h3 {
+      margin: 30px 0 15px;
+    }
     p {
       font-family: "Open Sans";
-      margin-bottom: 20px;
+      margin-bottom: 15px;
     }
     table {
       width: 100%;
@@ -239,49 +278,55 @@ input {
 }
 
 .list-container {
-  .bg {
+  .bgs {
     position: relative;
-    left: 240px;
-    margin-top: 60px;
-    p {
-      font-size: 14px;
-      line-height: 20px;
+    top: -15px;
+    h1 {
+      margin-top: 25px;
+      padding-left: 240px;
     }
-    h3 {
-      margin-bottom: 15px;
-    }
-    &:first-child {
-      margin-top: 40px;
-    }
-    .bg-img {
-      width: 250px;
-    }
-    .bg-info {
-      width: 410px;
-      &>div {
-        padding-left: 40px;
+    .bg {
+      position: relative;
+      left: 240px;
+      margin-top: 55px;
+      p {
+        font-size: 14px;
+        line-height: 20px;
       }
-    }
-    table {
-      font-size: 15px;
-      td {
-        padding-bottom: 10px;
+      h3 {
+        margin-bottom: 15px;
       }
-    }
-    .btn {
-      font-size: 25px;
+      .bg-img {
+        width: 250px;
+      }
+      .bg-info {
+        width: 410px;
+        &>div {
+          padding-left: 40px;
+        }
+      }
+      table {
+        font-size: 15px;
+        td {
+          padding-bottom: 10px;
+        }
+      }
+      .btn {
+        font-size: 25px;
+      }
     }
   }
 }
 
 .banner {
   position: fixed;
-  top: 0;
+  top: 36px;
   background: url(https://d3levm2kxut31z.cloudfront.net/assets/premium-teams/pattern-9b343c69d49d77de7c574865c9e6a4c9.png);
   background-color: #AA4130;
   width: 200px;
   padding-bottom: 120px;
   color: white;
+  z-index: 998;
   .logo {
     padding: 15px 20px 0;
     font-size: 13px;
@@ -300,7 +345,7 @@ input {
     margin: 15px 0 0 20px;
   }
   .filters {
-    margin: 15px 20px;
+    margin: 15px 20px 0;
     input {
       &[type="text"] {
         padding: 4px 7px;
@@ -315,6 +360,7 @@ input {
         .checkbox-filter {
           position: relative;
           padding: 3px;
+          display: block;
           &:hover {
             background-color: #9E2D21;
           }
@@ -328,6 +374,8 @@ input {
             position: relative;
             bottom: 2px;
             margin-left: 3px;
+            display: inline-block;
+            width: 88%;
           }
         }
       }
@@ -372,7 +420,7 @@ input {
   .bg-img {
     text-align: center;
     img {
-      height: 255px;
+      width: 100%;
     }
   }
   .desc {
@@ -444,6 +492,12 @@ input {
         margin-top: 10px;
         color: #333;
         text-transform: uppercase;
+        a {
+          color: #333;
+          &:hover {
+            color: $p;
+          }
+        }
       }
       img {
         max-width: 100%;
@@ -460,7 +514,7 @@ input {
 
 .arrow_box {
   position: relative;
-  background: #fbfbfb;
+  @include bg;
   position: absolute;
   bottom: -3px;
   left: 50%;
@@ -489,7 +543,7 @@ input {
   border: 4px solid $white;
   padding: 6px 15px;
   @include text-shadow(none);
-  background: url(https://dl.dropbox.com/u/4457377/images/arrow.png);
+  background: url(arrow.png);
   background-repeat: no-repeat;
   background-position: 95% center;
   background-color: #777;
