@@ -30,7 +30,7 @@ class BoardgamesController < ApplicationController
           :minPlayers => b.min_num_players,
           :maxPlayers => b.max_num_players,
           :time => b.playing_time,
-          :image => b.image_url,
+          :image => b.image.url(:thumb),
           :desc => b.desc,
           :age => b.age,
           :mechanic => b.mechanic,

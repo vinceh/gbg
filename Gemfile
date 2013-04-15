@@ -7,7 +7,7 @@ gem 'rails', '3.2.7'
 
 # gem 'mysql2'
 gem 'pg'
-gem "paperclip", "~> 2.7"
+gem "paperclip", "~> 3.0"
 gem 'aws-s3'
 gem 'aws-sdk'
 gem 'will_paginate'

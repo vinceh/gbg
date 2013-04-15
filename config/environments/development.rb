@@ -36,4 +36,6 @@ Bgre::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
   config.assets.paths << "#{Rails.root}/app/assets/html"
+
+  Paperclip.options[:command_path] = "/c/Program Files/ImageMagick-6.8.4-Q16/convert"
 end

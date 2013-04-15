@@ -89,7 +89,7 @@
     <% @bgs.each do |b| %>
       <div class="bg">
         <div class="bg-img">
-          <%= image_tag b.image_url %>
+          <%= image_tag b.image.url(:thumb) %>
         </div>
         <div class="bg-info">
           <div>

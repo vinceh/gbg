@@ -6,6 +6,9 @@ class Boardgame < ActiveRecord::Base
                       :s3_credentials => {
                         :access_key_id => 'AKIAI576XAU7SH57QZFA',
                         :secret_access_key => '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'
+                      },
+                      :styles => {
+                        :thumb => ["350x1000"]
                       }
 
   has_many :categories
