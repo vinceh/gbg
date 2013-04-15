@@ -1,7 +1,15 @@
+<div class="modalwrap">
+  <div class="backwash"></div>
+  <div class="video">
+    <span class="close">close</span>
+    <iframe width="640" height="480" frameborder="0"></iframe>
+  </div>
+</div>
+
 <div class="container bg-details">
   <div class="bg">
     <div class="bg-img">
-      <%= image_tag @bg.image_url %>
+      <%= image_tag @bg.image %>
     </div>
     <div class="bg-info">
       <div>
@@ -45,13 +53,44 @@
 <div class="container you-may sub-detail">
   <div class="lesser-header">
     <hr>
+    <h3>videos</h3>
+  </div>
+  <div class="items">
+    <% @bg.videos.each do |v| %>
+      <div class="item youtube" data-youtube="<%= v[:videoId] %>">
+        <%= image_tag v[:thumbnail] %>
+        <div class="title"><%= v[:title] %></div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+  <script>
+    $('.you-may .youtube').click(function() {
+
+      var id = $(this).attr('data-youtube');
+      $('.modalwrap iframe').attr('src','http://www.youtube.com/embed/'+id+'?autoplay=1&showinfo=0&theme=light&rel=0&color=white');
+      $('.modalwrap').show();
+      $('body').css('overflow', 'hidden');
+    });
+
+    $(document).on('click', '.modalwrap', function() {
+      $('.modalwrap iframe').attr('src','');
+      $('.modalwrap').hide();
+      $('body').css('overflow', 'scroll');
+    });
+  </script>
+
+<div class="container you-may sub-detail">
+  <div class="lesser-header">
+    <hr>
     <h3>you may also like</h3>
   </div>
   <div class="items">
     <% @similar.first(4).each do |s| %>
       <div class="item">
         <%= link_to(:action => :detail, :id => s.id) do %>
-          <%= image_tag s.image_url %>
+          <%= image_tag s.image %>
         <% end %>
         <div><%= link_to "#{s.name} (#{s.year_published})", :action => :detail, :id => s.id %></div>
       </div>

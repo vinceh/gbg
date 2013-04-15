@@ -35,6 +35,80 @@ class Boardgame < ActiveRecord::Base
     end
   end
 
+  def videos
+    videos = []
+
+    require 'net/http'
+    require 'json'
+
+    game = URI.encode(name + " boardgame")
+
+    starlit = "UC8kPXWmQIhKRcQu2oLi0Tyg"
+    tabletop = "UCaBf1a-dpIsw8OxqH4ki2Kg"
+    dicetower = "UCiwBbXQlljGjKtKhcdMliRA"
+
+    # starlit citadels
+    options = {
+      :maxResults => 4,
+      :q => game,
+      :key => "AIzaSyALrXdHmy3so_PNiAIYRfNZeDBFyaF4sW4",
+      :channelId => starlit
+    }
+
+    body = youtube(options)
+    if body["items"].length > 0
+      videos.push(parseVideo(body["items"][0]))
+    end
+
+    tabletop
+    options = {
+      :maxResults => 4,
+      :q => game,
+      :key => "AIzaSyALrXdHmy3so_PNiAIYRfNZeDBFyaF4sW4",
+      :channelId => tabletop
+    }
+
+    body = youtube(options)
+    if body["items"].length > 0
+      videos.push(parseVideo(body["items"][0]))
+    end
+
+    # dicetower
+    options = {
+      :maxResults => 4,
+      :q => game,
+      :key => "AIzaSyALrXdHmy3so_PNiAIYRfNZeDBFyaF4sW4",
+      :channelId => dicetower
+    }
+
+    body = youtube(options)
+    if body["items"].length > 0
+      videos.push(parseVideo(body["items"][0]))
+    end
+
+    # any
+    options = {
+      :maxResults => 5,
+      :q => game,
+      :key => "AIzaSyALrXdHmy3so_PNiAIYRfNZeDBFyaF4sW4"
+    }
+
+    body = youtube(options)
+    if body["items"].length > 0
+      index = 0
+
+      while videos.length < 4 do
+        v = parseVideo(body["items"][index])
+        unless vidExist(videos, v)
+          videos.push(v)
+        end
+        index = index + 1
+      end
+    end
+
+    videos
+  end
+
   #def price
   #  req = Vacuum.new
   #
@@ -158,5 +232,42 @@ class Boardgame < ActiveRecord::Base
      "Transportation" => "Modern Themes",
      "Travel" => "Modern Themes"
     }
+  end
+
+  private
+
+  def vidExist(vids, vid)
+    vids.each do |v|
+      if v[:videoId] == vid[:videoId]
+        return true
+      end
+    end
+
+    false
+  end
+
+  def parseVideo(vid)
+    return {
+      :title => vid["snippet"]["title"],
+      :thumbnail => vid["snippet"]["thumbnails"]["high"]["url"],
+      :videoId => vid["id"]["videoId"],
+    }
+  end
+
+  def youtube(options)
+
+    if options[:channelId]
+      url = URI.parse("https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=#{options[:maxResults]}&q=#{options[:q]}%20review&key=AIzaSyALrXdHmy3so_PNiAIYRfNZeDBFyaF4sW4&type=video&videoDefinition=high&channelId=#{options[:channelId]}&videoEmbeddable=true")
+    else
+      url = URI.parse("https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=#{options[:maxResults]}&q=#{options[:q]}%20review&key=AIzaSyALrXdHmy3so_PNiAIYRfNZeDBFyaF4sW4&type=video&videoDefinition=high&videoEmbeddable=true")
+    end
+
+    req = Net::HTTP::Get.new(url.to_s)
+    http = Net::HTTP.new(url.host, url.port)
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    http.use_ssl = true
+    response = http.request(req)
+
+    return JSON.parse(response.body)
   end
 end

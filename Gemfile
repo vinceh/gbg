@@ -13,6 +13,7 @@ gem 'aws-sdk'
 gem 'will_paginate'
 gem 'angularjs-rails'
 gem 'vacuum'
+gem 'taps'
 
 # Gems used only for assets and not required
 # in production environments by default.
