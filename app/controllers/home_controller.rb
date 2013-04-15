@@ -9,129 +9,129 @@ class HomeController < ApplicationController
 
   end
 
-  #def testing
-  #  req = Vacuum.new
-  #
-  #  b = Boardgame.find(params[:id])
-  #  game = b.name
-  #
-  #  game = game.gsub /\s*\(.+\)$/, ''
-  #  game = game.gsub '-', ' '
-  #  game = game.gsub ':', ' '
-  #  game = game.gsub '!', ' '
-  #  game = game.gsub '#', ' '
-  #  game = game.gsub '?', ' '
-  #  game = game.gsub '\'', ' '
-  #
-  #  req.configure key:    'AKIAJWEKVGBSCPOG544A',
-  #                secret: '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',
-  #                tag:    'getboar-20'
-  #
-  #  params = { 'Operation'   => 'ItemSearch',
-  #             'SearchIndex' => 'All',
-  #             'Keywords'    => game,
-  #             'ResponseGroup' => 'Offers,Large'}
-  #
-  #  @res = req.get query: params # XPath is your friend.
-  #  doc = Nokogiri.XML(@res.body)
-  #
-  #  urlNode = doc.xpath('//xmlns:Item//xmlns:ItemLink//xmlns:URL')[0]
-  #  priceNode = doc.xpath('//xmlns:FormattedPrice')[0]
-  #
-  #  if (urlNode && priceNode)
-  #    url = urlNode.text
-  #    price  = priceNode.text
-  #
-  #    b.amazon_url = url
-  #    b.price = price
-  #    b.save!
-  #  end
-  #
-  #  #render :text => "#{game}: #{price} @ #{url}"
-  #   render :xml => doc
-  #end
-
   def testing
+    req = Vacuum.new
 
-    bgs = {
-      :boardgames => []
-    }
+    b = Boardgame.find(params[:id])
+    game = params[:game]
 
-    Boardgame.all.each_with_index do |bg, i|
+    game = game.gsub /\s*\(.+\)$/, ''
+    game = game.gsub '-', ' '
+    game = game.gsub ':', ' '
+    game = game.gsub '!', ' '
+    game = game.gsub '#', ' '
+    game = game.gsub '?', ' '
+    game = game.gsub '\'', ' '
 
-      bgs[:boardgames].push(
-        {
-          :name => bg.name,
-          :bgg_rating => bg.bgg_rating,
-          :user_rating => bg.user_rating,
-          :num_votes => bg.num_votes,
-          :bgg_id => bg.bgg_id,
-          :year_published => bg.year_published,
-          :min_num_players => bg.min_num_players,
-          :max_num_players => bg.max_num_players,
-          :playing_time => bg.playing_time,
-          :image_url => bg.image_url,
-          :image_file_name => bg.image_file_name,
-          :image_file_size => bg.image_file_size,
-          :image_content_type => bg.image_content_type,
-          :image_updated_at => bg.image_updated_at,
-          :desc => bg.desc,
-          :age => bg.age,
-          :gbg_rating => bg.gbg_rating,
-          :price => bg.price,
-          :amazon_url => bg.amazon_url,
-          :categories => [],
-          :honours => [],
-          :mechanics => [],
-          :subdomains => []
-        }
-      )
+    req.configure key:    'AKIAJWEKVGBSCPOG544A',
+                  secret: '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',
+                  tag:    'getboar-20'
 
-      cats = Category.where(:boardgame_id => bg.id)
+    params = { 'Operation'   => 'ItemSearch',
+               'SearchIndex' => 'All',
+               'Keywords'    => game,
+               'ResponseGroup' => 'Offers,Large'}
 
-      cats.each do |c|
-        bgs[:boardgames][i][:categories].push(
-          {
-            :category_value => c.category_value
-          }
-        )
-      end
+    @res = req.get query: params # XPath is your friend.
+    doc = Nokogiri.XML(@res.body)
 
-      hon = Honour.where(:boardgame_id => bg.id)
+    urlNode = doc.xpath('//xmlns:Item//xmlns:ItemLink//xmlns:URL')[0]
+    priceNode = doc.xpath('//xmlns:FormattedPrice')[0]
 
-      hon.each do |c|
-        bgs[:boardgames][i][:honours].push(
-          {
-            :honour_value => c.honour_value
-          }
-        )
-      end
+    if (urlNode && priceNode)
+      url = urlNode.text
+      price  = priceNode.text
 
-      mech = Mechanic.where(:boardgame_id => bg.id)
-
-      mech.each do |c|
-        bgs[:boardgames][i][:mechanics].push(
-          {
-            :mechanic_value => c.mechanic_value
-          }
-        )
-      end
-
-      sub = Subdomain.where(:boardgame_id => bg.id)
-
-      sub.each do |c|
-        bgs[:boardgames][i][:subdomains].push(
-          {
-            :subdomain_value => c.subdomain_value
-          }
-        )
-      end
-
+      b.amazon_url = url
+      b.price = price
+      b.save!
     end
 
-    render :json => bgs.to_json
-    #render :text => body["items"].length
+    render :text => "#{game}: #{price} @ #{url}"
+     # render :xml => doc
   end
+
+  #def testing
+  #
+  #  bgs = {
+  #    :boardgames => []
+  #  }
+  #
+  #  Boardgame.all.each_with_index do |bg, i|
+  #
+  #    bgs[:boardgames].push(
+  #      {
+  #        :name => bg.name,
+  #        :bgg_rating => bg.bgg_rating,
+  #        :user_rating => bg.user_rating,
+  #        :num_votes => bg.num_votes,
+  #        :bgg_id => bg.bgg_id,
+  #        :year_published => bg.year_published,
+  #        :min_num_players => bg.min_num_players,
+  #        :max_num_players => bg.max_num_players,
+  #        :playing_time => bg.playing_time,
+  #        :image_url => bg.image_url,
+  #        :image_file_name => bg.image_file_name,
+  #        :image_file_size => bg.image_file_size,
+  #        :image_content_type => bg.image_content_type,
+  #        :image_updated_at => bg.image_updated_at,
+  #        :desc => bg.desc,
+  #        :age => bg.age,
+  #        :gbg_rating => bg.gbg_rating,
+  #        :price => bg.price,
+  #        :amazon_url => bg.amazon_url,
+  #        :categories => [],
+  #        :honours => [],
+  #        :mechanics => [],
+  #        :subdomains => []
+  #      }
+  #    )
+  #
+  #    cats = Category.where(:boardgame_id => bg.id)
+  #
+  #    cats.each do |c|
+  #      bgs[:boardgames][i][:categories].push(
+  #        {
+  #          :category_value => c.category_value
+  #        }
+  #      )
+  #    end
+  #
+  #    hon = Honour.where(:boardgame_id => bg.id)
+  #
+  #    hon.each do |c|
+  #      bgs[:boardgames][i][:honours].push(
+  #        {
+  #          :honour_value => c.honour_value
+  #        }
+  #      )
+  #    end
+  #
+  #    mech = Mechanic.where(:boardgame_id => bg.id)
+  #
+  #    mech.each do |c|
+  #      bgs[:boardgames][i][:mechanics].push(
+  #        {
+  #          :mechanic_value => c.mechanic_value
+  #        }
+  #      )
+  #    end
+  #
+  #    sub = Subdomain.where(:boardgame_id => bg.id)
+  #
+  #    sub.each do |c|
+  #      bgs[:boardgames][i][:subdomains].push(
+  #        {
+  #          :subdomain_value => c.subdomain_value
+  #        }
+  #      )
+  #    end
+  #
+  #  end
+  #
+  #  render :json => bgs.to_json
+  #  #render :text => body["items"].length
+  #end
 
   def grab
     require 'net/http'
