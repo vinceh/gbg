@@ -54,7 +54,9 @@
       <h1><%= image_tag "ajax-loader.gif", "ng-show" => "filtering" %></h1>
       <div class="bg" ng-repeat="bg in bgs | filter:searchText">
         <div class="bg-img">
-          <img ng-src="{{bg.image}}"/>
+          <a target="_blank" href="/boardgame/{{bg.id}}">
+            <img ng-src="{{bg.image}}"/>
+          </a>
         </div>
         <div class="bg-info">
           <div>

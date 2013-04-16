@@ -89,7 +89,9 @@
     <% @bgs.each do |b| %>
       <div class="bg">
         <div class="bg-img">
-          <%= image_tag b.image.url(:thumb) %>
+          <%= link_to :controller => :boardgames, :action => :detail, :id => b.id do %>
+            <%= image_tag b.image.url(:thumb) %>
+          <% end %>
         </div>
         <div class="bg-info">
           <div>
