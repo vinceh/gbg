@@ -19,7 +19,7 @@ function ListCtrl($scope, $location, Boardgame) {
             "War": {checked: true}
         },
         initials: {
-            age: 10,
+            age: 14,
             players: 6,
             time: 180
         }
