@@ -80,7 +80,7 @@
                 <td> {{bg.time}}min </td>
               </tr>
             </table>
-            <a target="_blank" href="{{bg.aUrl}}" class="btn">buy for {{bg.aPrice}} <%= image_tag "Amazon-Logo.png" %></a>
+            <a target="_blank" href="{{bg.aUrl}}" class="btn amazon-url" data-bgId="{{bg.name}}">buy for {{bg.aPrice}} <%= image_tag "Amazon-Logo.png" %></a>
           </div>
         </div>
       </div>
@@ -89,3 +89,8 @@
     </div>
   </div>
 </div>
+
+
+<script>
+  mixpanel.track('BG List view');
+</script>

@@ -126,10 +126,8 @@ task :amazon_images => :environment do
 
   Boardgame.all.each do |b|
     puts "Getting image for #{b.name} at #{b.id}"
-    b.image = open(b.image_url)
+    b.image = URI.parse(b.image_url)
     b.save!
-
-    sleep(1)
   end
 end
 

@@ -7,6 +7,7 @@ class Boardgame < ActiveRecord::Base
                         :access_key_id => 'AKIAI576XAU7SH57QZFA',
                         :secret_access_key => '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'
                       },
+                      :path => "/:attachment/:style/:id.:extension",
                       :styles => {
                         :thumb => ["350x1000"]
                       }

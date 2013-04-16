@@ -13,7 +13,7 @@
           <option value="<%= i+1 %>"><%= c %> Games</option>
         <% end  %>
       </select>
-      <button>GO!</button>
+      <button class='landing-go'>GO!</button>
     </div>
   </div>
 </div>
@@ -26,7 +26,7 @@
   </div>
 
   <div class="container categories">
-    <a class="cat-link" href="/boardgames/#/?releaseDate=1">
+    <a class="cat-link" href="/boardgames/#/?releaseDate=1" data-cat="newhot">
       <div>
         <div>new & hot</div>
         <div class="cat-img">
@@ -34,7 +34,7 @@
         </div>
       </div>
     </a>
-    <a class="cat-link" href="/boardgames/#/?time=45">
+    <a class="cat-link" href="/boardgames/#/?time=45" data-cat="shortsweet">
       <div>
         <div>short & sweet</div>
         <div class="cat-img">
@@ -42,7 +42,7 @@
         </div>
       </div>
     </a>
-    <a class="cat-link" href="/boardgames/#/?players=9">
+    <a class="cat-link" href="/boardgames/#/?players=9" data-cat="gathertroops">
       <div>
         <div>gather the troops!</div>
         <div class="cat-img">
@@ -50,7 +50,7 @@
         </div>
       </div>
     </a>
-    <a class="cat-link" href="/boardgames/#/?players=2">
+    <a class="cat-link" href="/boardgames/#/?players=2" data-cat="2player">
       <div>
         <div>2 player showdown</div>
         <div class="cat-img">
@@ -58,7 +58,7 @@
         </div>
       </div>
     </a>
-    <a class="cat-link" href="/boardgames/#/?noCats=Adventure,Ancient%2FMythology,Card%2FClassic,Economic%2FPolitical,Fantasy%2FSci%2DFi,Medieval%2FCultural,Miniatures%2FExpansions,War">
+    <a class="cat-link" href="/boardgames/#/?noCats=Adventure,Ancient%2FMythology,Card%2FClassic,Economic%2FPolitical,Fantasy%2FSci%2DFi,Medieval%2FCultural,Miniatures%2FExpansions,War" data-cat="family">
       <div>
         <div>good for family</div>
         <div class="cat-img">
@@ -66,7 +66,7 @@
         </div>
       </div>
     </a>
-    <a class="cat-link">
+    <a class="cat-link" data-cat="party">
       <div>
         <div>it's party time</div>
         <div class="cat-img">
@@ -115,7 +115,7 @@
                 <td> <%= b.playing_time %> min </td>
               </tr>
             </table>
-            <a target="_blank" href="<%= b.amazon_url %>" class="btn">buy for <%= b.price %> <%= image_tag "Amazon-Logo.png" %></a>
+            <a target="_blank" href="<%= b.amazon_url %>" class="btn amazon-url" data-bgId="<%= b.name %>">buy for <%= b.price %> <%= image_tag "Amazon-Logo.png" %></a>
           </div>
         </div>
       </div>
@@ -124,11 +124,16 @@
 </div>
 
 <script>
-
   $("#catSelect").customSelect();
 
+  $(document).on('click', '.cat-link', function() {
+    mixpanel.track('Category clicked',{'cat': $(this).attr('data-cat')});
+  });
+
+
   $(".hero-select button").click(function() {
-    console.log($(".hero-select select").val());
+    mixpanel.track('Landing Go click',{'value': $(".hero-select select").val()});
+
     switch (parseInt($(".hero-select select").val())) {
       case 0:
         window.location = "/boardgames";
@@ -165,4 +170,6 @@
         break;
     }
   });
+
+  mixpanel.track('Landing page view');
 </script>

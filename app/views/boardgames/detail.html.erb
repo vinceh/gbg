@@ -35,7 +35,7 @@
             <td> <%= @bg.playing_time %>min </td>
           </tr>
         </table>
-        <a target="_blank" href="<%= @bg.amazon_url %>" class="btn">buy for <%= @bg.price %> <%= image_tag "Amazon-Logo.png" %></a>
+        <a target="_blank" href="<%= @bg.amazon_url %>" class="btn amazon-url" data-bgId="<%= @bg.name %>">buy for <%= @bg.price %> <%= image_tag "Amazon-Logo.png" %></a>
 
         <div class="about">
           <h3>about this game</h3>
@@ -119,3 +119,7 @@
   <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
   <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 </div>
+
+<script>
+  mixpanel.track('bgView', {'bg': <%= @bg.id %>});
+</script>
