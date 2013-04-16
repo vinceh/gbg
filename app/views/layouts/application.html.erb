@@ -18,10 +18,26 @@
 mixpanel.init("5701233eb72fc7ba03fb101973d2a311");</script><!-- end Mixpanel -->
   <%= javascript_include_tag "global" %>
 
+
+
   <script>
     $(document).on('click', '.amazon-url', function() {
       mixpanel.track('bgBuyIntent', {'bg': $(this).attr('data-bgId')});
     })
+  </script>
+
+  <script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-40164485-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
   </script>
 </head>
 <body>
