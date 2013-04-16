@@ -4,6 +4,8 @@ Bgre::Application.routes.draw do
   get 'boardgames' => 'home#bg_list'
   get 'boardgame/:id' => 'boardgames#detail'
   get 'test' => 'home#testing'
+  get 'search_boardgames' => 'boardgames#search'
+  get 'single_search' => 'boardgames#single_search'
   #get 'grab' => 'home#grab'
 
   get 'api/bg' => 'boardgames#retrieve'

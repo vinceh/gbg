@@ -43,4 +43,19 @@ class BoardgamesController < ApplicationController
 
     render :json => bgs.to_json
   end
+
+  def search
+
+    render :json => Boardgame.search_bg(params[:term])
+  end
+
+  def single_search
+
+    bg = Boardgame.single_search(params[:term])
+    if bg.length == 1
+      render :json => {:id => bg[0]}
+    else
+      render :json => {:id => nil}
+    end
+  end
 end

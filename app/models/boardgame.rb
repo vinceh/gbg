@@ -17,6 +17,15 @@ class Boardgame < ActiveRecord::Base
   has_many :mechanics
   has_many :subdomains
 
+  def self.search_bg(term)
+    suggestions = where("name ilike ?", "%#{term}%")
+    suggestions.order('gbg_rating desc').limit(15).pluck(:name)
+  end
+
+  def self.single_search(bg)
+    where("name ilike ?", "%#{bg}%").order('gbg_rating desc').limit(1).pluck(:id)
+  end
+
   def num_players
     if min_num_players == max_num_players
       return min_num_players
