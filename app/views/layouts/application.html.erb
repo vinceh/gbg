@@ -36,6 +36,8 @@ mixpanel.init("5701233eb72fc7ba03fb101973d2a311");</script><!-- end Mixpanel -->
     </span>
     <%= link_to "Browse Boardgames", {:controller => :home, :action => :bg_list}, :class => "link" %>
     <form class="search-form">
+      <%= image_tag "ball.gif" %>
+      <span class="formtext">invalid game</span>
       <input type="text" class="search-input" placeholder="Boardgame Search">
       <button>GO</button>
     </form>
