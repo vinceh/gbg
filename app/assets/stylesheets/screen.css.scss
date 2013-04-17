@@ -7,8 +7,11 @@
 @import "compass";
 
 $w: 900px;
-$p: #3FA9F5;
-$pd: #2AA1EA;
+$p: #ca3e33;
+//$p: #a9312b;
+$pd: #b6372b;
+$s: #333;
+$sd: #667435;
 $white: #fbfbfb;
 
 @mixin bg {
@@ -163,7 +166,7 @@ input {
   font-weight: bold;
   text-transform: uppercase;
   border: none;
-  border: 1px solid #2e8bcd;
+  border: 1px solid #ca2b1b;
   padding: 5px 0;
   @include box-shadow(inset 0 1px 0 rgba(255,255,255,.3));
   &:hover {
@@ -231,16 +234,15 @@ input {
     float: left;
     margin-right: 50px;
     margin-bottom: 50px;
-    width: 264px;
+    width: 256px;
     height: 248px;
-    color: $white;
+    color: $p;
     text-transform: uppercase;
-    font-size: 30px;
-    background-color: $p;
+    font-size: 28px;
     @include box-shadow(inset 0 1px 0 rgba(255,255,255,.3));
     @include transition-property(bottom);
     @include transition-duration(0.2s);
-    border: 1px solid #2e8bcd;
+    border: 5px solid $p;
     &:active {
       @include box-shadow(inset 0 1px 2px rgba(0,0,0,.3));
     }
@@ -295,6 +297,7 @@ input {
     h2 {
       text-transform: uppercase;
       margin-bottom: 20px;
+
     }
     .about h3 {
       margin: 30px 0 15px;
@@ -314,7 +317,7 @@ input {
         padding-bottom: 20px;
         &.title {
           width: 20%;
-          color: #AA4130;
+          color: $s;
         }
       }
     }
@@ -370,7 +373,7 @@ input {
   position: fixed;
   top: 36px;
   background: url(pattern.png);
-  background-color: #AA4130;
+  background-color: $s;
   width: 200px;
   padding-bottom: 120px;
   color: white;
@@ -410,7 +413,7 @@ input {
           padding: 3px;
           display: block;
           &:hover {
-            background-color: #9E2D21;
+            background-color: $sd;
           }
           input {
             margin: 0;
