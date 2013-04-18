@@ -24,6 +24,7 @@
 mixpanel.init("5701233eb72fc7ba03fb101973d2a311");</script><!-- end Mixpanel -->
   <%= javascript_include_tag "global" %>
 
+
   <script>
     $(document).on('click', '.amazon-url', function() {
       mixpanel.track('bgBuyIntent', {'bg': $(this).attr('data-bgId')});
@@ -66,6 +67,23 @@ mixpanel.init("5701233eb72fc7ba03fb101973d2a311");</script><!-- end Mixpanel -->
 </div>
 
 <%= yield %>
+
+<div class="footer">
+  <div class="bottom">
+    <div class="container">
+      <h4>Copyright 2013 &middot; Emberyl Creative Inc</h4>
+      <div class="static">
+        <%= link_to "Terms & Privacy", terms_path %>
+      </div>
+
+      <div class="social">
+        <a href="mailto:hello@emberyl.com"><%= image_tag "email.png" %></a>
+        <a href="https://twitter.com/Emberyl"><%= image_tag "twitter.png" %></a>
+        <a><%= image_tag "facebook.png" %></a>
+      </div>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>

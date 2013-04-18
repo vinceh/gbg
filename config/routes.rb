@@ -6,6 +6,7 @@ Bgre::Application.routes.draw do
   get 'test' => 'home#testing'
   get 'search_boardgames' => 'boardgames#search'
   get 'single_search' => 'boardgames#single_search'
+  get 'terms' => 'home#terms', :as => 'terms'
   #get 'grab' => 'home#grab'
 
   get 'api/bg' => 'boardgames#retrieve'

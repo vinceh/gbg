@@ -41,9 +41,12 @@ a {
   }
 }
 
+p {
+  @include text-shadow(0 1px 0 white);
+}
+
 body {
   padding-top: 36px;
-  padding-bottom: 100px;
   background-color: #fbfbfb;
   @include bg;
 }
@@ -259,10 +262,59 @@ input {
         text-align: center;
         img {
           margin-top: 15px;
-          max-height: 55%;
+          height: 150px;
         }
       }
     }
+  }
+}
+
+.footer {
+  margin-top: 75px;
+  .top {
+    height: 150px;
+    background-color: #444;
+  }
+  .bottom {
+    height: 50px;
+    background-color: #333;
+    h4 {
+      color: #ddd;
+      font-size: 20px;
+      padding-top: 3px;
+      font-weight: bold;
+      padding-top: 15px;
+      text-transform: uppercase;
+      @include inline-block;
+      margin-right: 3px;
+    }
+    .static {
+      margin-left: 20px;
+      @include inline-block;
+      padding-top: 15px;
+      a {
+        color: #ddd;
+        &:hover {
+          color: $p;
+        }
+      }
+    }
+    .social {
+      float: right;
+      a {
+        opacity: 0.9;
+        img {
+          height: 30px;
+          position: relative;
+          top: 11px;
+          margin-left: 10px;
+        }
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+
   }
 }
 
@@ -656,5 +708,22 @@ input {
         color: #555;
       }
     }
+  }
+}
+
+.terms {
+  font-family: 'Open Sans';
+  p {
+    line-height: 24px;
+    margin-bottom: 15px;
+  }
+  h1, h2, h3, h4 {
+    margin: 20px 0;
+    font-family: "Open Sans Condensed"
+  }
+  h4 {
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #333;
   }
 }
