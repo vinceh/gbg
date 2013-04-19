@@ -41,6 +41,14 @@ a {
   }
 }
 
+.ui-tooltip {
+  font-size: 14px;
+  color: #555;
+  line-height: 20px;
+  @include box-shadow(none);
+  border: 1px solid #aaa !important;
+}
+
 p {
   @include text-shadow(0 1px 0 white);
 }

@@ -1,4 +1,7 @@
 $(window).load(function() {
+
+    $(document).tooltip();
+
     $('.search-input').autocomplete({
         source: '/search_boardgames'
     });
