@@ -70,6 +70,16 @@ p {
   a {
     color: white;
   }
+  .paypal {
+    @include inline-block;
+    height: 0;
+    position: relative;
+    bottom: 17px;
+    left: 15px;
+    form {
+      @include inline-block;
+    }
+  }
   .logo img {
     height: 15px;
   }
