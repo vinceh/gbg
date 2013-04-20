@@ -202,7 +202,7 @@ class Boardgame < ActiveRecord::Base
      "Environmental" => "Economic/Political",
      "Exploration" => "Adventure",
      "Fantasy" => "Fantasy/Sci-Fi",
-     "Abstract Strategy" => "Fantasy/Sci-Fi",
+     "Abstract Strategy" => "Modern Themes",
      "Farming" => "Economic/Political",
      "Fighting" => "Modern Themes",
      "Game System" => "Card/Classic",
