@@ -13,12 +13,13 @@ class AdminsController < ApplicationController
   def login
     admin = Admin.where(:username => params[:admin][:username]).first
 
+    puts admin.to_s + " ADAFIDAISADFSDJIA"
     if admin != nil && admin.hashed_password == BCrypt::Engine.hash_secret(params[:admin][:password], admin.salt)
       session[:admin] = admin.id
       redirect_to :action => :controlpanel
     else
       flash[:error] = "Invalid Login"
-      redirect_to :action => :login
+      redirect_to :action => :admin
     end
   end
 
