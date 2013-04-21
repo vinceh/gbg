@@ -19,6 +19,15 @@
   <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
   <%= javascript_include_tag "global" %>
 
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=640951265930610";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+
   <!-- start Mixpanel --><script type="text/javascript">(function(e,b){if(!b.__SV){var a,f,i,g;window.mixpanel=b;a=e.createElement("script");a.type="text/javascript";a.async=!0;a.src=("https:"===e.location.protocol?"https:":"http:")+'//cdn.mxpnl.com/libs/mixpanel-2.2.min.js';f=e.getElementsByTagName("script")[0];f.parentNode.insertBefore(a,f);b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==
   typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");for(g=0;g<i.length;g++)f(c,i[g]);
   b._i.push([a,e,d])};b.__SV=1.2}})(document,window.mixpanel||[]);
@@ -66,6 +75,18 @@ mixpanel.init("5701233eb72fc7ba03fb101973d2a311");</script><!-- end Mixpanel -->
 
 <div class="topbar">
   <div class="container">
+    <div class="floating-social">
+      <div class="items">
+        <div class="backwash"></div>
+        <div class="social">
+          <div class="fb-like" data-href="http://www.getboardgames.com" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false"></div>
+        </div>
+        <div class="social">
+          <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.getboardgames.com" data-via="emberyl" data-hashtags="boardgames">Tweet</a>
+          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+      </div>
+    </div>
     <span class="logo">
       <%= link_to :controller => :home do %>
         <%= image_tag "gbg-logo.png" %>
@@ -74,7 +95,7 @@ mixpanel.init("5701233eb72fc7ba03fb101973d2a311");</script><!-- end Mixpanel -->
     </span>
     <%= link_to "Browse Boardgames", {:controller => :home, :action => :bg_list}, :class => "link" %>
     <div class="paypal">
-      <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" title="to help us keep this service alive, please consider donating $10 :)">
+      <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" title="to help us keep this service alive, please consider donating $10 :)" class="donate">
         <input type="hidden" name="cmd" value="_s-xclick">
         <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----">
         <input type="image" src="<%= asset_path('donate-button.png')%>" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">

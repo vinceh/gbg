@@ -178,6 +178,17 @@ angular.module('gbg.services', [], function($provide) {
 });
 
 angular.module('gbg.directives', []).
+    directive('popUp', function(){
+        return {
+            restrict: 'A',
+            link: function($scope, $element, $attrs){
+                $element.click(function(){
+                    console.log('popping', $attrs.popUp);
+                    window.open(encodeURI($attrs.popUp),'mywindow','width='+$attrs.width+',height='+$attrs.height);
+                });
+            }
+        }
+    }).
     directive('scrolly', function() {
         return {
             restrict: "A",

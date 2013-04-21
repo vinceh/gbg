@@ -1,6 +1,6 @@
 $(window).load(function() {
 
-    $(document).tooltip();
+    $('.donate').tooltip();
 
     $('.search-input').autocomplete({
         source: '/search_boardgames'
@@ -34,5 +34,9 @@ $(window).load(function() {
         });
 
         return false;
+    });
+
+    $('.facebook').click(function() {
+        window.open($(this).attr('data-url'),'mywindow','width=600,height=300');
     });
 });
