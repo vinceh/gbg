@@ -11,7 +11,7 @@ class AdminsController < ApplicationController
   end
 
   def login
-    admin = Admin.where(:username => params[:admin][:username]).first
+    admin = Admin.all.first
 
     puts Admin.all.first.username + " ADAFIDAISADFSDJIA"
     if admin != nil && admin.hashed_password == BCrypt::Engine.hash_secret(params[:admin][:password], admin.salt)
