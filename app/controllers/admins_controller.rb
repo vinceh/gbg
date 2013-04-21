@@ -11,9 +11,9 @@ class AdminsController < ApplicationController
   end
 
   def login
-    admin = Admin.all.first
+    #admin = Admin.all.first
 
-    puts Admin.all.first.to_s + " ADAFIDAISADFSDJIA"
+    #puts Admin.all.first.to_s + " ADAFIDAISADFSDJIA"
     if params[:admin][:password] == "donburichan"
       session[:admin] = admin.id
       redirect_to :action => :controlpanel
