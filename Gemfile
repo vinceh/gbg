@@ -14,6 +14,7 @@ gem 'will_paginate'
 gem 'angularjs-rails'
 gem 'vacuum'
 gem 'taps'
+gem "bcrypt-ruby", :require => "bcrypt"
 
 # Gems used only for assets and not required
 # in production environments by default.

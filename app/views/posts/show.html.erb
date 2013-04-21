@@ -1,0 +1,19 @@
+<div class="container blog">
+  <div class="post-list">
+    <% @posts.each do |p| %>
+      <div class="post-link">
+        <%= link_to p.title, :action => :show, :id => p.id %>
+        <div class="time"><%= p.created_at.strftime("%B %d, %Y") %></div>
+      </div>
+    <% end %>
+  </div>
+  <div class="posts-wrap">
+    <div class="post">
+      <h1><%= @post.title %></h1>
+      <div class="time"><%= @post.created_at.strftime("%B %d, %Y") %></div>
+      <div class="postbody">
+        <%= raw @post.body  %>
+      </div>
+    </div>
+  </div>
+</div>

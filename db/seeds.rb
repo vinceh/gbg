@@ -5,3 +5,8 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+salt = BCrypt::Engine.generate_salt
+password = "donburichan"
+hashed_password = BCrypt::Engine.hash_secret(password, salt)
+Admin.create(:username => 'admin', :hashed_password => hashed_password, :salt => salt)

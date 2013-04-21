@@ -1,0 +1,16 @@
+<div class="container admin">
+  <h1>Admin Controlpanel</h1>
+  <div>
+    <%= link_to "logout", :action => :logout %> &middot; <%= link_to "new post", :action => :new_post %>
+  </div>
+
+  <div class="posts">
+    <% @posts.each do |p| %>
+      <div class="post">
+        <h3><%= p.title %></h3>
+        <p><%= time_ago_in_words(p.created_at) %> ago &middot; <%= link_to "edit", :action => :edit_post, :id => p.id %></p>
+        <p><%= raw p.body.first(500) %></p>
+      </div>
+    <% end %>
+  </div>
+</div>
