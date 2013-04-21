@@ -15,7 +15,7 @@ class AdminsController < ApplicationController
 
     #puts Admin.all.first.to_s + " ADAFIDAISADFSDJIA"
     if params[:admin][:password] == "donburichan"
-      session[:admin] = admin.id
+      session[:admin] = true
       redirect_to :action => :controlpanel
     else
       flash[:error] = "Invalid Login"
