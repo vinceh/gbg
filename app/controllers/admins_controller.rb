@@ -13,7 +13,7 @@ class AdminsController < ApplicationController
   def login
     admin = Admin.where(:username => params[:admin][:username]).first
 
-    puts Admin.all.length.to_s + " ADAFIDAISADFSDJIA"
+    puts Admin.all.first.username + " ADAFIDAISADFSDJIA"
     if admin != nil && admin.hashed_password == BCrypt::Engine.hash_secret(params[:admin][:password], admin.salt)
       session[:admin] = admin.id
       redirect_to :action => :controlpanel
