@@ -808,8 +808,12 @@ input {
 .post {
   font-family: "Open Sans";
   color: #555;
-  h1 {
+  h1, h3 {
     font-family: "Open Sans Condensed";
+  }
+  h3 {
+    margin-top: 30px;
+    margin-bottom: 15px;
   }
   .time {
     color: #555;
@@ -834,10 +838,12 @@ input {
   }
   ul {
     font-size: 13px;
+    margin-bottom: 20px;
     li {
       margin-bottom: 10px;
-      padding-left: 5px;
+      padding-left: 10px;
       border-left: 3px solid $p;
+      line-height: 24px;
     }
   }
 }
