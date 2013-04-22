@@ -866,6 +866,14 @@ input {
   .post-form {
     width: 449px;
     float: left;
+    font-family: "Open Sans";
+    ul {
+      li {
+        margin-bottom: 5px;
+        border-left: 2px solid $p;
+        padding-left: 5px;
+      }
+    }
     textarea {
       width: 410px;
       height: 1000px;
