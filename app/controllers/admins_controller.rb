@@ -38,6 +38,7 @@ class AdminsController < ApplicationController
 
   def create_post
     @post = Post.new(params[:post])
+    @post.published = true
     @post.save!
 
     redirect_to :action => :controlpanel
