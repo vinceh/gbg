@@ -1,11 +1,5 @@
 <div ng-app class="post-maker container">
   <div class="post-form">
-    <ul>
-      <li>Usage</li>
-      <li>use &lt;p&gt;test&lt;/p&gt; for paragraph text</li>
-      <li>use &lt;strong&gt;text&lt;/strong&gt; for <strong>bolded text</strong></li>
-      <li>use &lt;ul&gt;&lt;li&gt;listItem1&lt;/li&gt;&lt;li&gt;listItem2&lt;/li&gt;&lt;/ul&gt; for creating lists</li>
-    </ul>
     <%= form_for @post, :url => {:action => "create_post"} do |f| %>
       <%= f.label :title, 'Title' %>
       <%= f.text_field :title %>
