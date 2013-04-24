@@ -54,5 +54,12 @@ class AdminsController < ApplicationController
 
     redirect_to :action => :controlpanel
   end
+
+  def delete_post
+    @post = Post.find(params[:id])
+    @post.destroy
+
+    redirect_to :action => :controlpanel
+  end
 end
 

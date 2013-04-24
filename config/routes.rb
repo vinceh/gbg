@@ -14,6 +14,7 @@ Bgre::Application.routes.draw do
   get 'controlpanel' => 'admins#controlpanel'
   get 'controlpanel/editpost/:id' => 'admins#edit_post'
   put 'controlpanel/updatepost' => 'admins#update_post'
+  delete 'controlpanel/deletepost' => 'admins#delete_post'
   get 'blog/:id' => "posts#show"
   get 'logout' => 'admins#logout'
 
