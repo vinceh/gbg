@@ -447,7 +447,8 @@ input {
   top: -1px;
   left: -175px;
   .fb-like {
-    bottom: 5px;
+    position: relative;
+    bottom: 0px;
     margin-right: 5px;
   }
   .social {
