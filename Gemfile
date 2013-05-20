@@ -36,6 +36,10 @@ gem 'seed_dumper'
 
 gem 'commands', group: [:development, :test]
 
+gem 'sitemap_generator'
+gem 'carrierwave'
+gem 'fog' # if you're using S3
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
