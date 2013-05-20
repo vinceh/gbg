@@ -4,4 +4,4 @@
 # User-Agent: *
 # Disallow: /
 
-Sitemap: http://s3.amazonaws.com/getboardgames/sitemaps/sitemap_index.xml.gz
+Sitemap: https://s3.amazonaws.com/getboardgames/sitemaps/sitemap_index.xml.gz
