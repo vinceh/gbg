@@ -2,7 +2,7 @@ Bgre::Application.routes.draw do
 
   root :to => 'home#index'
   get 'boardgames' => 'home#bg_list'
-  get 'boardgame/:id' => 'boardgames#detail'
+  get 'boardgame/:id/:title' => 'boardgames#detail'
   get 'test' => 'home#testing'
   get 'search_boardgames' => 'boardgames#search'
   get 'single_search' => 'boardgames#single_search'

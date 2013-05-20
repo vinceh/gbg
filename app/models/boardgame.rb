@@ -122,6 +122,10 @@ class Boardgame < ActiveRecord::Base
     videos
   end
 
+  def parameter
+    name.parameterize
+  end
+
   #def price
   #  req = Vacuum.new
   #

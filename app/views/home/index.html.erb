@@ -89,13 +89,13 @@
     <% @bgs.each do |b| %>
       <div class="bg">
         <div class="bg-img">
-          <%= link_to :controller => :boardgames, :action => :detail, :id => b.id do %>
+          <%= link_to :controller => :boardgames, :action => :detail, :id => b.id, :title => b.parameter do %>
             <%= image_tag b.image.url(:thumb) %>
           <% end %>
         </div>
         <div class="bg-info">
           <div>
-            <h2> <%= link_to b.name+" ("+b.year_published+")", :controller => :boardgames, :action => :detail, :id => b.id %></h2>
+            <h2> <%= link_to b.name+" ("+b.year_published+")", :controller => :boardgames, :action => :detail, :id => b.id, :title => b.parameter %></h2>
             <p><%= raw b.desc.first(240) %>...</p>
             <table>
               <tr>

@@ -25,6 +25,7 @@ class BoardgamesController < ApplicationController
         {
           :id => b.id,
           :name => b.name,
+          :parameter => b.parameter,
           :rating => b.gbg_rating,
           :year => b.year_published,
           :minPlayers => b.min_num_players,

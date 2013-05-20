@@ -74,10 +74,10 @@
   <div class="items">
     <% @similar.first(4).each do |s| %>
       <div class="item">
-        <%= link_to({:action => :detail, :id => s.id}, :class => 'related') do %>
+        <%= link_to({:action => :detail, :id => s.id, :title => s.parameter}, :class => 'related') do %>
           <%= image_tag s.image %>
         <% end %>
-        <div><%= link_to "#{s.name} (#{s.year_published})", {:action => :detail, :id => s.id}, :class => 'related' %></div>
+        <div><%= link_to "#{s.name} (#{s.year_published})", {:action => :detail, :id => s.id, :title => s.parameter}, :class => 'related' %></div>
       </div>
     <% end %>
   </div>
