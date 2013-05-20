@@ -185,3 +185,9 @@ task :amazon => :environment do
     sleep(1)
   end
 end
+
+desc "This task is called by the Heroku cron add-on"
+task :call_page => :environment do
+  uri = URI.parse('http://www.getclamshells.com/')
+  Net::HTTP.get(uri)
+end
